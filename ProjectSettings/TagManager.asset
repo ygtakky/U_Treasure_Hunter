@@ -41,3 +41,36 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background_Far
+    uniqueID: 3030260603
+    locked: 0
+  - name: Background_Middle
+    uniqueID: 1045613391
+    locked: 0
+  - name: Background_Near
+    uniqueID: 3164885853
+    locked: 0
+  - name: Ground
+    uniqueID: 3879908491
+    locked: 0
+  - name: Background_Props
+    uniqueID: 1769973645
+    locked: 0
+  - name: Player
+    uniqueID: 1498599813
+    locked: 0
+  - name: Enemy
+    uniqueID: 2259253585
+    locked: 0
+  - name: Props
+    uniqueID: 473955671
+    locked: 0
+  - name: Traps
+    uniqueID: 61436203
+    locked: 0
+  - name: Collectibles
+    uniqueID: 1899353509
+    locked: 0
+  - name: UI
+    uniqueID: 168635143
+    locked: 0
