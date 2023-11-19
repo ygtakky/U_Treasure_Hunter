@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8534b0d970bffc344ac7f07349c0c425
+guid: fd998584bf925ac49bca56abd3903f0c
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Pokemon Classic
+  - Light Pixel-7
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
