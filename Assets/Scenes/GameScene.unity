@@ -949,6 +949,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6255770180272386753, guid: 8f2fe6f26152f1847abca920ce57d6aa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1179118390}
+    - targetCorrespondingSourceObject: {fileID: 6255770180272386753, guid: 8f2fe6f26152f1847abca920ce57d6aa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1179118392}
   m_SourcePrefab: {fileID: 100100000, guid: 8f2fe6f26152f1847abca920ce57d6aa, type: 3}
 --- !u!224 &273888824 stripped
 RectTransform:
@@ -11954,7 +11957,7 @@ Tilemap:
       - {fileID: 21300000, guid: 90cf53f04b9fe2945af7f00c88613c7b, type: 3}
       - {fileID: 21300000, guid: 59c3a23a1f2858548b5b9fbb3d339b97, type: 3}
       - {fileID: 21300000, guid: 953371b6886df724b9ec2bd367a4ff27, type: 3}
-      m_AnimationSpeed: 6
+      m_AnimationSpeed: 6.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
@@ -12104,6 +12107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 618774752}
+  - component: {fileID: 618774753}
   m_Layer: 5
   m_Name: Game Over Modal
   m_TagString: Untagged
@@ -12134,6 +12138,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 2940, y: 1340}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &618774753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618774751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2692799123621194ab000e066c6c63ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &656393878
 GameObject:
   m_ObjectHideFlags: 0
@@ -12277,6 +12293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 688961075}
+  - component: {fileID: 688961076}
   m_Layer: 5
   m_Name: Game Won Modal
   m_TagString: Untagged
@@ -12307,6 +12324,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 2940, y: 1340}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &688961076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688961074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2692799123621194ab000e066c6c63ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &696730979
 GameObject:
   m_ObjectHideFlags: 0
@@ -12731,6 +12760,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6255770180272386753, guid: 8f2fe6f26152f1847abca920ce57d6aa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 777440885}
+    - targetCorrespondingSourceObject: {fileID: 6255770180272386753, guid: 8f2fe6f26152f1847abca920ce57d6aa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 777440887}
   m_SourcePrefab: {fileID: 100100000, guid: 8f2fe6f26152f1847abca920ce57d6aa, type: 3}
 --- !u!224 &777440882 stripped
 RectTransform:
@@ -12797,6 +12829,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &777440887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777440884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56d4c1b16210de649a55a0fbb6890661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenToToggle: {fileID: 688961076}
 --- !u!1 &789780978
 GameObject:
   m_ObjectHideFlags: 0
@@ -12842,6 +12887,7 @@ GameObject:
   m_Component:
   - component: {fileID: 836002473}
   - component: {fileID: 836002474}
+  - component: {fileID: 836002475}
   m_Layer: 5
   m_Name: Jump Button
   m_TagString: Untagged
@@ -12913,6 +12959,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &836002475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836002472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56d4c1b16210de649a55a0fbb6890661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenToToggle: {fileID: 618774753}
 --- !u!1 &862758149
 GameObject:
   m_ObjectHideFlags: 0
@@ -13159,6 +13218,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6255770180272386753, guid: 8f2fe6f26152f1847abca920ce57d6aa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 896212377}
+    - targetCorrespondingSourceObject: {fileID: 6255770180272386753, guid: 8f2fe6f26152f1847abca920ce57d6aa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 896212379}
   m_SourcePrefab: {fileID: 100100000, guid: 8f2fe6f26152f1847abca920ce57d6aa, type: 3}
 --- !u!224 &896212374 stripped
 RectTransform:
@@ -13225,6 +13287,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &896212379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896212376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c315f2307e48746498c88c2167b10323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1000520488
 GameObject:
   m_ObjectHideFlags: 0
@@ -13913,6 +13987,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1179118392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179118388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c315f2307e48746498c88c2167b10323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1199039910
 GameObject:
   m_ObjectHideFlags: 0
@@ -14371,6 +14457,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1223232551}
   - component: {fileID: 1223232552}
+  - component: {fileID: 1223232553}
   m_Layer: 5
   m_Name: Attack Button
   m_TagString: Untagged
@@ -14442,6 +14529,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1223232553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223232550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56d4c1b16210de649a55a0fbb6890661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenToToggle: {fileID: 688961076}
 --- !u!1 &1257053492
 GameObject:
   m_ObjectHideFlags: 0
@@ -14470,8 +14570,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 618774752}
   - {fileID: 688961075}
+  - {fileID: 618774752}
   m_Father: {fileID: 1899565400}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -16144,7 +16244,7 @@ Tilemap:
       - {fileID: 21300000, guid: a6fc1938461eda34e938d60a5e64a219, type: 3}
       - {fileID: 21300000, guid: e6d1fc32b11a8ce49bd98970f5a99adf, type: 3}
       - {fileID: 21300000, guid: 25d564003f87be247839a6e6b20a9e90, type: 3}
-      m_AnimationSpeed: 6.0000005
+      m_AnimationSpeed: 6
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -7, y: -2, z: 0}
@@ -16432,6 +16532,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6255770180272386753, guid: 8f2fe6f26152f1847abca920ce57d6aa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1912055763}
+    - targetCorrespondingSourceObject: {fileID: 6255770180272386753, guid: 8f2fe6f26152f1847abca920ce57d6aa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1912055765}
   m_SourcePrefab: {fileID: 100100000, guid: 8f2fe6f26152f1847abca920ce57d6aa, type: 3}
 --- !u!224 &1661570467 stripped
 RectTransform:
@@ -16816,6 +16919,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1912055765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912055761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56d4c1b16210de649a55a0fbb6890661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenToToggle: {fileID: 618774753}
 --- !u!1 &1921949241
 GameObject:
   m_ObjectHideFlags: 0
