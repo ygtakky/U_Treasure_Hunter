@@ -22,27 +22,28 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         CheckGrounded();
-        
-        Debug.Log(isGrounded);
-        
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            isJumping = true;
-        }
+        GetInputs();
     }
         
 
     private void FixedUpdate()
     {
-        if (isJumping && isGrounded)
+        Jump();
+        Move();
+    }
+    
+    private void GetInputs()
+    {
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        
+        if (Input.GetButtonDown("Jump"))
         {
-            Jump();
+            isJumping = true;
         }
-        
-        isJumping = false;
-        
+    }
+    
+    private void Move()
+    {
         Vector2 currentVelocity = rb.velocity;
         Vector2 newVelocity = currentVelocity;
         newVelocity.x = horizontalInput * settings.movementSpeed * Time.fixedDeltaTime;
@@ -52,7 +53,12 @@ public class PlayerController : MonoBehaviour
     
     private void Jump()
     {
-        rb.AddForce(Vector2.up * settings.jumpForce, ForceMode2D.Impulse);
+        if (isJumping && isGrounded)
+        {
+            rb.AddForce(Vector2.up * settings.jumpForce, ForceMode2D.Impulse);
+        }
+        
+        isJumping = false;
     }
     
     private void CheckGrounded()

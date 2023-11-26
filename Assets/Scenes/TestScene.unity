@@ -644,9 +644,29 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths: []
+  m_ColliderPaths:
+  - m_Collider: {fileID: 441723151}
+    m_ColliderPaths:
+    - - X: 130000000
+        Y: -19687500
+      - X: 130000000
+        Y: -10000000
+      - X: -130000000
+        Y: -10000000
+      - X: -130000000
+        Y: -19062500
+      - X: -128437504
+        Y: -20000000
+      - X: 129375000
+        Y: -20000000
   m_CompositePaths:
-    m_Paths: []
+    m_Paths:
+    - - {x: 12.937494, y: -2}
+      - {x: 13, y: -1.9687334}
+      - {x: 12.99997, y: -1}
+      - {x: -13, y: -1.0000293}
+      - {x: -12.999988, y: -1.906258}
+      - {x: -12.843743, y: -2}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
@@ -709,7 +729,7 @@ TilemapCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
@@ -849,6 +869,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5260477240931180298, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: m_Size.x
+      value: 0.5363464
+      objectReference: {fileID: 0}
+    - target: {fileID: 5260477240931180298, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: m_Size.y
+      value: 0.2534359
+      objectReference: {fileID: 0}
+    - target: {fileID: 5260477240931180298, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.000000029365637
+      objectReference: {fileID: 0}
+    - target: {fileID: 5260477240931180298, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.24633685
+      objectReference: {fileID: 0}
+    - target: {fileID: 5260477240931180298, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: m_Direction
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860532798969329825, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860532798969329825, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6311806010044636521, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7729272186413810596, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
