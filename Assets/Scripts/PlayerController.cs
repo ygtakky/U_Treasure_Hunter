@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool IsGrounded { get; private set; }
+    
     [SerializeField] private PlayerData settings;
     
     [Header("Grounding Check")]
@@ -11,8 +13,7 @@ public class PlayerController : MonoBehaviour
     
     private Rigidbody2D rb;
     private float horizontalInput;
-    private bool isGrounded;
-    private bool isJumping;
+    private bool isJumpButtonPressed;
     
     private void Awake()
     {
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetButtonDown("Jump"))
         {
-            isJumping = true;
+            isJumpButtonPressed = true;
         }
     }
     
@@ -46,28 +47,59 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 currentVelocity = rb.velocity;
         Vector2 newVelocity = currentVelocity;
+        
         newVelocity.x = horizontalInput * settings.movementSpeed * Time.fixedDeltaTime;
 
         rb.velocity = Vector2.Lerp(currentVelocity, newVelocity, 10.0f);
+        
+        if (rb.velocity.y < settings.maxFallSpeed)
+        {
+            float clampedYSpeed = Mathf.Clamp(rb.velocity.y, -settings.maxFallSpeed, settings.maxFallSpeed);
+            rb.velocity = new Vector2(rb.velocity.x, clampedYSpeed);
+        }
+
+        if (IsJumping())
+        {
+            rb.gravityScale = 1.0f;
+        }
+        else if (IsFalling())
+        {
+            rb.gravityScale = 2.0f;
+        }
+        
+        if (horizontalInput != 0.0f)
+        {
+            transform.localScale = new Vector3(horizontalInput, 1.0f, 1.0f);
+        }
     }
     
     private void Jump()
     {
-        if (isJumping && isGrounded)
+        if (isJumpButtonPressed && IsGrounded)
         {
             rb.AddForce(Vector2.up * settings.jumpForce, ForceMode2D.Impulse);
         }
         
-        isJumping = false;
+        isJumpButtonPressed = false;
     }
     
     private void CheckGrounded()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
+        IsGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
     }
     
-    private void OnDrawGizmos()
+    public Vector2 GetVelocity()
     {
-        Gizmos.DrawWireSphere(groundCheck.position, 0.1f);
+        return rb.velocity;
+    }
+    
+    public bool IsJumping()
+    {
+        return rb.velocity.y > 0.0f && !IsGrounded;
+    }
+    
+    public bool IsFalling()
+    {
+        return rb.velocity.y < 0.0f && !IsGrounded;
     }
 }

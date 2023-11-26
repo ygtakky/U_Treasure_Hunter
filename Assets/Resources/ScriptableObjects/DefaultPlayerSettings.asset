@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 300
   jumpForce: 6
+  maxFallSpeed: 8

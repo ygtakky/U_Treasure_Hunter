@@ -5,4 +5,5 @@ public class PlayerData : ScriptableObject
 {
     public float movementSpeed;
     public float jumpForce;
+    public float maxFallSpeed;
 }
