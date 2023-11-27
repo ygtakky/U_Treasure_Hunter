@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private float horizontalInput;
     private bool isJumpPressed;
+    private bool wasJumping;
+    
+    #region Unity Events
     
     private void Awake()
     {
@@ -43,15 +46,9 @@ public class PlayerController : MonoBehaviour
         Move();
     }
     
-    private void GetInputs()
-    {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        
-        if (Input.GetButtonDown("Jump"))
-        {
-            isJumpPressed = true;
-        }
-    }
+    #endregion
+    
+    #region Movement Methods
     
     private void Move()
     {
@@ -88,6 +85,20 @@ public class PlayerController : MonoBehaviour
         
         isJumpPressed = false;
     }
+    
+    #endregion
+    
+    #region Helper Methods
+    
+    private void GetInputs()
+    {
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        
+        if (Input.GetButtonDown("Jump"))
+        {
+            isJumpPressed = true;
+        }
+    }
 
     private void InvokeMovementEvents()
     {
@@ -102,13 +113,20 @@ public class PlayerController : MonoBehaviour
         
         if (IsFalling())
         {
+            if (!wasJumping)
+            {
+                wasJumping = true;
+            }
+            
             OnFall?.Invoke(this, EventArgs.Empty);
         }
         
-        if (IsGrounded && (IsJumping() || IsFalling()))
+        if (IsGrounded && wasJumping)
         {
+            wasJumping = false;
             OnLand?.Invoke(this, EventArgs.Empty);
         }
+        
     }
     
     private void CheckGravityScale()
@@ -142,4 +160,6 @@ public class PlayerController : MonoBehaviour
     {
         return rb.velocity.y < 0.0f && !IsGrounded;
     }
+    
+    #endregion
 }

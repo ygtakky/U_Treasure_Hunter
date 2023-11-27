@@ -9,6 +9,8 @@ public class PlayerAnimationController : MonoBehaviour
     private Animator animator;
     private string currentState;
     
+    #region Unity Events
+    
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -32,15 +34,27 @@ public class PlayerAnimationController : MonoBehaviour
         playerController.OnLand -= PlayerController_OnLand;
     }
     
+    #endregion
+    
     #region Event Handlers
     
     private void PlayerController_OnMove(object sender, EventArgs e)
     {
+        if (IsLandAnimationPlayingAndNotFinished())
+        {
+            return;
+        }
+        
         ChangeState(PlayerAnimationStates.RUN);
     }
 
     private void PlayerController_OnStopMove(object sender, EventArgs e)
     {
+        if (IsLandAnimationPlayingAndNotFinished())
+        {
+            return;
+        }
+        
         ChangeState(PlayerAnimationStates.IDLE);
     }
     
@@ -56,7 +70,7 @@ public class PlayerAnimationController : MonoBehaviour
     
     private void PlayerController_OnLand(object sender, EventArgs e)
     {
-        ChangeState(PlayerAnimationStates.IDLE);
+        ChangeState(PlayerAnimationStates.LAND);
     }
     
     #endregion
@@ -72,12 +86,24 @@ public class PlayerAnimationController : MonoBehaviour
         
         currentState = state;
     }
+    
+    private bool IsLandAnimationPlayingAndNotFinished()
+    {
+        return currentState == PlayerAnimationStates.LAND && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f;
+    }
+    
+    private void OnLandAnimationCompleted()
+    {
+        ChangeState(PlayerAnimationStates.IDLE);
+    }
 }
 
-public class PlayerAnimationStates
+public static class PlayerAnimationStates
 {
     public const string IDLE = "Player_Idle";
     public const string RUN = "Player_Run";
     public const string JUMP = "Player_Jump";
     public const string FALL = "Player_Fall";
+    public const string LAND = "Player_Land";
+    public const string ATTACK = "Player_Attack";
 }
