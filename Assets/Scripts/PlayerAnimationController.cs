@@ -1,42 +1,83 @@
+using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class PlayerAnimationController : MonoBehaviour
 {
     [SerializeField] private PlayerController playerController;
-    private Animator animator;
     
-    private static readonly int HorizontalVelocity = Animator.StringToHash("HorizontalVelocity");
-    private static readonly int VerticalVelocity = Animator.StringToHash("VerticalVelocity");
-    private static readonly int IsMoving = Animator.StringToHash("IsMoving");
-    private static readonly int IsFalling = Animator.StringToHash("IsFalling");
-    private static readonly int IsJumping = Animator.StringToHash("IsJumping");
+    private Animator animator;
+    private string currentState;
     
     private void Awake()
     {
         animator = GetComponent<Animator>();
     }
-    
-    private void Update()
+
+    private void OnEnable()
     {
-        Vector2 playerVelocity = playerController.GetVelocity().normalized;
-        bool isFalling = playerController.IsFalling();
-        bool isJumping = playerController.IsJumping();
-        bool isMoving = playerVelocity.x != 0.0f;
+        playerController.OnMove += PlayerController_OnMove;
+        playerController.OnStopMove += PlayerController_OnStopMove;
+        playerController.OnJump += PlayerController_OnJump;
+        playerController.OnFall += PlayerController_OnFall;
+        playerController.OnLand += PlayerController_OnLand;
+    }
+
+    private void OnDisable()
+    {
+        playerController.OnMove -= PlayerController_OnMove;
+        playerController.OnStopMove -= PlayerController_OnStopMove;
+        playerController.OnJump -= PlayerController_OnJump;
+        playerController.OnFall -= PlayerController_OnFall;
+        playerController.OnLand -= PlayerController_OnLand;
+    }
+    
+    #region Event Handlers
+    
+    private void PlayerController_OnMove(object sender, EventArgs e)
+    {
+        ChangeState(PlayerAnimationStates.RUN);
+    }
+
+    private void PlayerController_OnStopMove(object sender, EventArgs e)
+    {
+        ChangeState(PlayerAnimationStates.IDLE);
+    }
+    
+    private void PlayerController_OnJump(object sender, EventArgs e)
+    {
+        ChangeState(PlayerAnimationStates.JUMP);
+    }
+    
+    private void PlayerController_OnFall(object sender, EventArgs e)
+    {
+        ChangeState(PlayerAnimationStates.FALL);
+    }
+    
+    private void PlayerController_OnLand(object sender, EventArgs e)
+    {
+        ChangeState(PlayerAnimationStates.IDLE);
+    }
+    
+    #endregion
+    
+    private void ChangeState(string state)
+    {
+        if (currentState == state)
+        {
+            return;
+        }
         
-        SetFloat(HorizontalVelocity, playerVelocity.x);
-        SetFloat(VerticalVelocity, playerVelocity.y);
-        SetBool(IsMoving, isMoving);
-        SetBool(IsJumping, isJumping);
-        SetBool(IsFalling, isFalling);
+        animator.Play(state);
+        
+        currentState = state;
     }
-    
-    private void SetBool(int parameterHash, bool value)
-    {
-        animator.SetBool(parameterHash, value);
-    }
-    
-    private void SetFloat(int parameterHash, float value)
-    {
-        animator.SetFloat(parameterHash, value);
-    }
+}
+
+public class PlayerAnimationStates
+{
+    public const string IDLE = "Player_Idle";
+    public const string RUN = "Player_Run";
+    public const string JUMP = "Player_Jump";
+    public const string FALL = "Player_Fall";
 }

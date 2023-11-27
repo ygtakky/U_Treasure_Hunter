@@ -3,6 +3,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    #region Events
+    
+    public event EventHandler OnMove;
+    public event EventHandler OnStopMove;
+    public event EventHandler OnJump;
+    public event EventHandler OnFall;
+    public event EventHandler OnLand;
+    
+    #endregion
+    
     public bool IsGrounded { get; private set; }
     
     [SerializeField] private PlayerData settings;
@@ -13,7 +23,7 @@ public class PlayerController : MonoBehaviour
     
     private Rigidbody2D rb;
     private float horizontalInput;
-    private bool isJumpButtonPressed;
+    private bool isJumpPressed;
     
     private void Awake()
     {
@@ -22,13 +32,13 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        CheckGrounded();
         GetInputs();
     }
         
 
     private void FixedUpdate()
     {
+        CheckGrounded();
         Jump();
         Move();
     }
@@ -39,7 +49,7 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetButtonDown("Jump"))
         {
-            isJumpButtonPressed = true;
+            isJumpPressed = true;
         }
     }
     
@@ -57,7 +67,52 @@ public class PlayerController : MonoBehaviour
             float clampedYSpeed = Mathf.Clamp(rb.velocity.y, -settings.maxFallSpeed, settings.maxFallSpeed);
             rb.velocity = new Vector2(rb.velocity.x, clampedYSpeed);
         }
+        
+        if (horizontalInput != 0.0f)
+        {
+            FlipSprite(horizontalInput);
+        }
 
+        CheckGravityScale();
+        
+        InvokeMovementEvents();
+    }
+    
+    private void Jump()
+    {
+        if (isJumpPressed && IsGrounded)
+        {
+            rb.AddForce(Vector2.up * settings.jumpForce, ForceMode2D.Impulse);
+            OnJump?.Invoke(this, EventArgs.Empty);
+        }
+        
+        isJumpPressed = false;
+    }
+
+    private void InvokeMovementEvents()
+    {
+        if (horizontalInput != 0.0f && IsGrounded)
+        {
+            OnMove?.Invoke(this, EventArgs.Empty);
+        }
+        else if (horizontalInput == 0.0f && IsGrounded)
+        {
+            OnStopMove?.Invoke(this, EventArgs.Empty);
+        }
+        
+        if (IsFalling())
+        {
+            OnFall?.Invoke(this, EventArgs.Empty);
+        }
+        
+        if (IsGrounded && (IsJumping() || IsFalling()))
+        {
+            OnLand?.Invoke(this, EventArgs.Empty);
+        }
+    }
+    
+    private void CheckGravityScale()
+    {
         if (IsJumping())
         {
             rb.gravityScale = 1.0f;
@@ -66,21 +121,11 @@ public class PlayerController : MonoBehaviour
         {
             rb.gravityScale = 2.0f;
         }
-        
-        if (horizontalInput != 0.0f)
-        {
-            transform.localScale = new Vector3(horizontalInput, 1.0f, 1.0f);
-        }
     }
     
-    private void Jump()
+    private void FlipSprite(float direction)
     {
-        if (isJumpButtonPressed && IsGrounded)
-        {
-            rb.AddForce(Vector2.up * settings.jumpForce, ForceMode2D.Impulse);
-        }
-        
-        isJumpButtonPressed = false;
+        transform.localScale = new Vector3(direction, 1.0f, 1.0f);
     }
     
     private void CheckGrounded()
@@ -88,17 +133,12 @@ public class PlayerController : MonoBehaviour
         IsGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
     }
     
-    public Vector2 GetVelocity()
-    {
-        return rb.velocity;
-    }
-    
-    public bool IsJumping()
+    private bool IsJumping()
     {
         return rb.velocity.y > 0.0f && !IsGrounded;
     }
     
-    public bool IsFalling()
+    private bool IsFalling()
     {
         return rb.velocity.y < 0.0f && !IsGrounded;
     }
