@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4585164ce76fd4247b496d660bdbe33b, type: 3}
-  m_Name: DefaultPlayerSettings
+  m_Script: {fileID: 11500000, guid: 4319dfe345d8b8843b5b4bbd179045dd, type: 3}
+  m_Name: CrabbyEnemySettings
   m_EditorClassIdentifier: 
-  maxHealth: 10
-  movementSpeed: 300
-  jumpForce: 6
-  maxFallSpeed: 8
-  attackCooldown: 0.6
-  attackRadius: 0.2
+  maxHealth: 2
+  sprite: {fileID: 21300000, guid: a64d6a24c9f6a4649b0a27a6a755fe14, type: 3}

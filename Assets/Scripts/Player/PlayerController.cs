@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable
 {
     #region Events
     
@@ -23,6 +23,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     
+    [Header("Attack Settings")]
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private LayerMask attackLayer;
+    
     private Rigidbody2D rb;
     private float horizontalInput;
     private bool isJumpPressed;
@@ -31,6 +35,7 @@ public class PlayerController : MonoBehaviour
     private bool isAttacking;
     private bool canAttack = true;
     private float attackTimer;
+    private int currentHealth;
     
     #region Unity Events
     
@@ -38,13 +43,17 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
+    
+    private void OnEnable()
+    {
+        currentHealth = settings.maxHealth;
+    }
 
     private void Update()
     {
         GetInputs();
         UpdateAttackTimer();
     }
-        
 
     private void FixedUpdate()
     {
@@ -53,7 +62,13 @@ public class PlayerController : MonoBehaviour
         Move();
         Attack();
     }
-    
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPoint.position, settings.attackRadius);
+    }
+
     #endregion
     
     #region Movement Methods
@@ -97,13 +112,23 @@ public class PlayerController : MonoBehaviour
     #endregion
     
     #region Helper Methods
-    
+
     private void Attack()
     {
         if (isAttackPressed && !isAttacking && canAttack)
         {
             canAttack = false;
             OnAttack?.Invoke(this, EventArgs.Empty);
+            
+            Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, settings.attackRadius, attackLayer);
+        
+            foreach (Collider2D enemy in enemies)
+            {
+                if (enemy.TryGetComponent(out IDamageable damageable))
+                {
+                    damageable.TakeDamage(1);
+                }
+            }
         }
         
         isAttackPressed = false;
@@ -203,4 +228,16 @@ public class PlayerController : MonoBehaviour
     }
     
     #endregion
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth < 0)
+        {
+            // TODO: Add player death logic
+        }
+        
+        Debug.Log($"Player took {damage} damage. Current health: {currentHealth}");
+    }
 }
