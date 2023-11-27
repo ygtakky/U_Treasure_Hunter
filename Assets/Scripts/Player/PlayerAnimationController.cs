@@ -23,6 +23,7 @@ public class PlayerAnimationController : MonoBehaviour
         playerController.OnJump += PlayerController_OnJump;
         playerController.OnFall += PlayerController_OnFall;
         playerController.OnLand += PlayerController_OnLand;
+        playerController.OnAttack += PlayerController_OnAttack;
     }
 
     private void OnDisable()
@@ -32,6 +33,7 @@ public class PlayerAnimationController : MonoBehaviour
         playerController.OnJump -= PlayerController_OnJump;
         playerController.OnFall -= PlayerController_OnFall;
         playerController.OnLand -= PlayerController_OnLand;
+        playerController.OnAttack -= PlayerController_OnAttack;
     }
     
     #endregion
@@ -40,7 +42,7 @@ public class PlayerAnimationController : MonoBehaviour
     
     private void PlayerController_OnMove(object sender, EventArgs e)
     {
-        if (IsLandAnimationPlayingAndNotFinished())
+        if (!CanChangeAnimationState())
         {
             return;
         }
@@ -50,7 +52,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void PlayerController_OnStopMove(object sender, EventArgs e)
     {
-        if (IsLandAnimationPlayingAndNotFinished())
+        if (!CanChangeAnimationState())
         {
             return;
         }
@@ -65,12 +67,22 @@ public class PlayerAnimationController : MonoBehaviour
     
     private void PlayerController_OnFall(object sender, EventArgs e)
     {
+        if (!CanChangeAnimationState())
+        {
+            return;
+        }
+        
         ChangeState(PlayerAnimationStates.FALL);
     }
     
     private void PlayerController_OnLand(object sender, EventArgs e)
     {
         ChangeState(PlayerAnimationStates.LAND);
+    }
+    
+    private void PlayerController_OnAttack(object sender, EventArgs e)
+    {
+        ChangeState(PlayerAnimationStates.ATTACK);
     }
     
     #endregion
@@ -87,13 +99,25 @@ public class PlayerAnimationController : MonoBehaviour
         currentState = state;
     }
     
-    private bool IsLandAnimationPlayingAndNotFinished()
+    private bool CanChangeAnimationState()
     {
-        return currentState == PlayerAnimationStates.LAND && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f;
+        return !IsAnimationPlaying(PlayerAnimationStates.LAND) && !IsAnimationPlaying(PlayerAnimationStates.ATTACK);
+    }
+    
+    private bool IsAnimationPlaying(string state)
+    {
+        return currentState == state && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f;
     }
     
     private void OnLandAnimationCompleted()
     {
+        ChangeState(PlayerAnimationStates.IDLE);
+    }
+    
+    private void OnAttackAnimationCompleted()
+    {
+        playerController.OnAttackCompleted();
+        
         ChangeState(PlayerAnimationStates.IDLE);
     }
 }

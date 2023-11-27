@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public event EventHandler OnFall;
     public event EventHandler OnLand;
     
+    public event EventHandler OnAttack;
+    
     #endregion
     
     public bool IsGrounded { get; private set; }
@@ -25,6 +27,10 @@ public class PlayerController : MonoBehaviour
     private float horizontalInput;
     private bool isJumpPressed;
     private bool wasJumping;
+    private bool isAttackPressed;
+    private bool isAttacking;
+    private bool canAttack = true;
+    private float attackTimer;
     
     #region Unity Events
     
@@ -36,6 +42,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         GetInputs();
+        UpdateAttackTimer();
     }
         
 
@@ -44,6 +51,7 @@ public class PlayerController : MonoBehaviour
         CheckGrounded();
         Jump();
         Move();
+        Attack();
     }
     
     #endregion
@@ -90,6 +98,34 @@ public class PlayerController : MonoBehaviour
     
     #region Helper Methods
     
+    private void Attack()
+    {
+        if (isAttackPressed && !isAttacking && canAttack)
+        {
+            canAttack = false;
+            OnAttack?.Invoke(this, EventArgs.Empty);
+        }
+        
+        isAttackPressed = false;
+    }
+    
+    private void UpdateAttackTimer()
+    {
+        if (canAttack) return;
+        
+        attackTimer += Time.deltaTime;
+        
+        if (!(attackTimer >= settings.attackCooldown)) return;
+        
+        canAttack = true;
+        attackTimer = 0.0f;
+    }
+    
+    public void OnAttackCompleted()
+    {
+        isAttacking = false;
+    }
+    
     private void GetInputs()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -97,6 +133,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             isJumpPressed = true;
+        }
+        
+        if (Input.GetButtonDown("Fire1"))
+        {
+            isAttackPressed = true;
         }
     }
 
