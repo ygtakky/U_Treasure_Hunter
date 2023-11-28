@@ -27,6 +27,10 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask attackLayer;
     
+    [Header("Mobile Controls")]
+    [SerializeField] private FixedJoystick joystick;
+    [SerializeField] private bool isDesktopControlsEnabled;
+    
     private Rigidbody2D rb;
     private float horizontalInput;
     private bool isJumpPressed;
@@ -153,17 +157,31 @@ public class PlayerController : MonoBehaviour, IDamageable
     
     private void GetInputs()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        
-        if (Input.GetButtonDown("Jump"))
+        horizontalInput = joystick.Horizontal;
+        if (horizontalInput < 0.0f)
         {
-            isJumpPressed = true;
+            horizontalInput = -1.0f;
+        }
+        else if (horizontalInput > 0.0f)
+        {
+            horizontalInput = 1.0f;
         }
         
-        if (Input.GetButtonDown("Fire1"))
+        if (isDesktopControlsEnabled)
         {
-            isAttackPressed = true;
+            horizontalInput = Input.GetAxisRaw("Horizontal");
+            
+            if (Input.GetButtonDown("Jump"))
+            {
+                isJumpPressed = true;
+            }
+    
+            if (Input.GetButtonDown("Fire1"))
+            {
+                isAttackPressed = true;
+            }
         }
+        
     }
 
     private void InvokeMovementEvents()
