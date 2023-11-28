@@ -56,11 +56,11 @@ TagManager:
   - name: Background_Props
     uniqueID: 1769973645
     locked: 0
-  - name: Player
-    uniqueID: 1498599813
-    locked: 0
   - name: Enemy
     uniqueID: 2259253585
+    locked: 0
+  - name: Player
+    uniqueID: 1498599813
     locked: 0
   - name: Props
     uniqueID: 473955671
@@ -70,6 +70,9 @@ TagManager:
     locked: 0
   - name: Collectibles
     uniqueID: 1899353509
+    locked: 0
+  - name: Effects
+    uniqueID: 639379879
     locked: 0
   - name: UI
     uniqueID: 168635143
