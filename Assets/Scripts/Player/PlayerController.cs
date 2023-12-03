@@ -3,21 +3,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamageable
 {
-    #region Events
-    
-    public event EventHandler OnMove;
-    public event EventHandler OnStopMove;
-    public event EventHandler OnJump;
-    public event EventHandler OnFall;
-    public event EventHandler OnLand;
-    
-    public event EventHandler OnAttack;
-    
-    #endregion
-    
     public bool IsGrounded { get; private set; }
     
     [SerializeField] private PlayerDataSO settings;
+    
+    [Header("Broadcasting Events")]
+    [SerializeField] private VoidEventChannelSO playerMoveChannel;
+    [SerializeField] private VoidEventChannelSO playerStopMoveChannel;
+    [SerializeField] private VoidEventChannelSO playerJumpChannel;
+    [SerializeField] private VoidEventChannelSO playerFallChannel;
+    [SerializeField] private VoidEventChannelSO playerLandChannel;
+    [SerializeField] private VoidEventChannelSO playerAttackChannel;
+    
+    [Header("Listening Events")]
+    [SerializeField] private VoidEventChannelSO playerAttackCompletedChannel;
     
     [Header("Grounding Check")]
     [SerializeField] private Transform groundCheck;
@@ -51,6 +50,13 @@ public class PlayerController : MonoBehaviour, IDamageable
     private void OnEnable()
     {
         currentHealth = settings.maxHealth;
+        
+        playerAttackCompletedChannel.OnEventRaised += OnAttackCompleted;
+    }
+    
+    private void OnDisable()
+    {
+        playerAttackCompletedChannel.OnEventRaised -= OnAttackCompleted;
     }
 
     private void Update()
@@ -107,7 +113,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (isJumpPressed && IsGrounded)
         {
             rb.AddForce(Vector2.up * settings.jumpForce, ForceMode2D.Impulse);
-            OnJump?.Invoke(this, EventArgs.Empty);
+            playerJumpChannel.RaiseEvent(this);
         }
         
         isJumpPressed = false;
@@ -122,7 +128,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (isAttackPressed && !isAttacking && canAttack)
         {
             canAttack = false;
-            OnAttack?.Invoke(this, EventArgs.Empty);
+            playerAttackChannel.RaiseEvent(this);
             
             Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, settings.attackRadius, attackLayer);
         
@@ -150,7 +156,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         attackTimer = 0.0f;
     }
     
-    public void OnAttackCompleted()
+    private void OnAttackCompleted(object sender, EventArgs e)
     {
         isAttacking = false;
     }
@@ -188,11 +194,11 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         if (horizontalInput != 0.0f && IsGrounded)
         {
-            OnMove?.Invoke(this, EventArgs.Empty);
+            playerMoveChannel.RaiseEvent(this);
         }
         else if (horizontalInput == 0.0f && IsGrounded)
         {
-            OnStopMove?.Invoke(this, EventArgs.Empty);
+            playerStopMoveChannel.RaiseEvent(this);
         }
         
         if (IsFalling())
@@ -202,13 +208,13 @@ public class PlayerController : MonoBehaviour, IDamageable
                 wasJumping = true;
             }
             
-            OnFall?.Invoke(this, EventArgs.Empty);
+            playerFallChannel.RaiseEvent(this);
         }
         
         if (IsGrounded && wasJumping)
         {
             wasJumping = false;
-            OnLand?.Invoke(this, EventArgs.Empty);
+            playerLandChannel.RaiseEvent(this);
         }
         
     }

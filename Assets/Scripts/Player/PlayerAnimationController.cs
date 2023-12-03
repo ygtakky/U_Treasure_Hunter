@@ -4,7 +4,16 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimationController : MonoBehaviour
 {
-    [SerializeField] private PlayerController playerController;
+    [Header("Broadcasting Events")]
+    [SerializeField] private VoidEventChannelSO playerAttackCompletedChannel;
+    
+    [Header("Listening Events")]
+    [SerializeField] private VoidEventChannelSO playerMoveChannel;
+    [SerializeField] private VoidEventChannelSO playerStopMoveChannel;
+    [SerializeField] private VoidEventChannelSO playerJumpChannel;
+    [SerializeField] private VoidEventChannelSO playerFallChannel;
+    [SerializeField] private VoidEventChannelSO playerLandChannel;
+    [SerializeField] private VoidEventChannelSO playerAttackChannel;
     
     private Animator animator;
     private string currentState;
@@ -18,29 +27,29 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void OnEnable()
     {
-        playerController.OnMove += PlayerController_OnMove;
-        playerController.OnStopMove += PlayerController_OnStopMove;
-        playerController.OnJump += PlayerController_OnJump;
-        playerController.OnFall += PlayerController_OnFall;
-        playerController.OnLand += PlayerController_OnLand;
-        playerController.OnAttack += PlayerController_OnAttack;
+        playerMoveChannel.OnEventRaised += PlayerMoveChannel_OnMove;
+        playerStopMoveChannel.OnEventRaised += PlayerStopMoveChannel_OnStopMove;
+        playerJumpChannel.OnEventRaised += PlayerJumpChannel_OnJump;
+        playerFallChannel.OnEventRaised += PlayerFallChannel_OnFall;
+        playerLandChannel.OnEventRaised += PlayerLandChannel_OnLand;
+        playerAttackChannel.OnEventRaised += PlayerAttackChannel_OnAttack;
     }
 
     private void OnDisable()
     {
-        playerController.OnMove -= PlayerController_OnMove;
-        playerController.OnStopMove -= PlayerController_OnStopMove;
-        playerController.OnJump -= PlayerController_OnJump;
-        playerController.OnFall -= PlayerController_OnFall;
-        playerController.OnLand -= PlayerController_OnLand;
-        playerController.OnAttack -= PlayerController_OnAttack;
+        playerMoveChannel.OnEventRaised -= PlayerMoveChannel_OnMove;
+        playerStopMoveChannel.OnEventRaised -= PlayerStopMoveChannel_OnStopMove;
+        playerJumpChannel.OnEventRaised -= PlayerJumpChannel_OnJump;
+        playerFallChannel.OnEventRaised -= PlayerFallChannel_OnFall;
+        playerLandChannel.OnEventRaised -= PlayerLandChannel_OnLand;
+        playerAttackChannel.OnEventRaised -= PlayerAttackChannel_OnAttack;
     }
     
     #endregion
     
     #region Event Handlers
     
-    private void PlayerController_OnMove(object sender, EventArgs e)
+    private void PlayerMoveChannel_OnMove(object sender, EventArgs e)
     {
         if (!CanChangeAnimationState())
         {
@@ -50,7 +59,7 @@ public class PlayerAnimationController : MonoBehaviour
         ChangeState(PlayerAnimationStates.RUN);
     }
 
-    private void PlayerController_OnStopMove(object sender, EventArgs e)
+    private void PlayerStopMoveChannel_OnStopMove(object sender, EventArgs e)
     {
         if (!CanChangeAnimationState())
         {
@@ -60,12 +69,12 @@ public class PlayerAnimationController : MonoBehaviour
         ChangeState(PlayerAnimationStates.IDLE);
     }
     
-    private void PlayerController_OnJump(object sender, EventArgs e)
+    private void PlayerJumpChannel_OnJump(object sender, EventArgs e)
     {
         ChangeState(PlayerAnimationStates.JUMP);
     }
     
-    private void PlayerController_OnFall(object sender, EventArgs e)
+    private void PlayerFallChannel_OnFall(object sender, EventArgs e)
     {
         if (!CanChangeAnimationState())
         {
@@ -75,12 +84,12 @@ public class PlayerAnimationController : MonoBehaviour
         ChangeState(PlayerAnimationStates.FALL);
     }
     
-    private void PlayerController_OnLand(object sender, EventArgs e)
+    private void PlayerLandChannel_OnLand(object sender, EventArgs e)
     {
         ChangeState(PlayerAnimationStates.LAND);
     }
     
-    private void PlayerController_OnAttack(object sender, EventArgs e)
+    private void PlayerAttackChannel_OnAttack(object sender, EventArgs e)
     {
         ChangeState(PlayerAnimationStates.ATTACK);
     }
@@ -101,7 +110,11 @@ public class PlayerAnimationController : MonoBehaviour
     
     private bool CanChangeAnimationState()
     {
-        return !IsAnimationPlaying(PlayerAnimationStates.LAND) && !IsAnimationPlaying(PlayerAnimationStates.ATTACK);
+        bool isLanding = IsAnimationPlaying(PlayerAnimationStates.LAND);
+        bool isAttacking = IsAnimationPlaying(PlayerAnimationStates.ATTACK);
+        bool isJumping = IsAnimationPlaying(PlayerAnimationStates.JUMP);
+        
+        return !isLanding && !isAttacking && !isJumping;
     }
     
     private bool IsAnimationPlaying(string state)
@@ -116,7 +129,7 @@ public class PlayerAnimationController : MonoBehaviour
     
     private void OnAttackAnimationCompleted()
     {
-        playerController.OnAttackCompleted();
+        playerAttackCompletedChannel.RaiseEvent(this);
         
         ChangeState(PlayerAnimationStates.IDLE);
     }

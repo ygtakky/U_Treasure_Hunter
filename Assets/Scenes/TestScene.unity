@@ -984,18 +984,74 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2902037508247574096, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: playerAttackChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 33b516330f2f5aa418851d500e07cd3a, type: 2}
+    - target: {fileID: 3368997780322156945, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: playerFallChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 6e80dc9b17d831548842c9335261ab98, type: 2}
+    - target: {fileID: 3368997780322156945, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: playerJumpChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 90156c99da7b74c4990383fc8147fbc9, type: 2}
+    - target: {fileID: 3368997780322156945, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: playerLandChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 13eac49126a6e394a945dbe59000acf3, type: 2}
     - target: {fileID: 3368997780322156945, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
       propertyPath: playerMoveChannel
       value: 
-      objectReference: {fileID: 11400000, guid: f2186ab50380f734c9c2d449019d7516, type: 2}
+      objectReference: {fileID: 11400000, guid: ed99c055a082a6f40ae104ccfa884648, type: 2}
+    - target: {fileID: 3368997780322156945, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: playerAttackChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 33b516330f2f5aa418851d500e07cd3a, type: 2}
+    - target: {fileID: 3368997780322156945, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: playerStopMoveChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: ece1a1a04c214994a8920f25583bd161, type: 2}
+    - target: {fileID: 3368997780322156945, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: playerAttackCompletedChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 017123f3a6ca021409c51ef1d895e077, type: 2}
     - target: {fileID: 6725120623927914769, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
       propertyPath: joystick
       value: 
       objectReference: {fileID: 1573285236}
     - target: {fileID: 6725120623927914769, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: voidEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 850d53a9e5aa69c4aa5758751c702cc7, type: 2}
+    - target: {fileID: 6725120623927914769, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: playerFallChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 6e80dc9b17d831548842c9335261ab98, type: 2}
+    - target: {fileID: 6725120623927914769, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: playerJumpChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 90156c99da7b74c4990383fc8147fbc9, type: 2}
+    - target: {fileID: 6725120623927914769, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: playerLandChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 13eac49126a6e394a945dbe59000acf3, type: 2}
+    - target: {fileID: 6725120623927914769, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
       propertyPath: playerMoveChannel
       value: 
-      objectReference: {fileID: 11400000, guid: f2186ab50380f734c9c2d449019d7516, type: 2}
+      objectReference: {fileID: 11400000, guid: ed99c055a082a6f40ae104ccfa884648, type: 2}
+    - target: {fileID: 6725120623927914769, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: playerAttackChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 33b516330f2f5aa418851d500e07cd3a, type: 2}
+    - target: {fileID: 6725120623927914769, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: playerStopMoveChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: ece1a1a04c214994a8920f25583bd161, type: 2}
+    - target: {fileID: 6725120623927914769, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: playerAttackCompletedChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 017123f3a6ca021409c51ef1d895e077, type: 2}
     - target: {fileID: 7729272186413810596, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1398,6 +1454,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 98133059895067108, guid: 06b39b2e6a9a0294e9109d8310b464f7, type: 3}
+      propertyPath: voidEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 850d53a9e5aa69c4aa5758751c702cc7, type: 2}
     - target: {fileID: 697129581673006688, guid: 06b39b2e6a9a0294e9109d8310b464f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.8529305

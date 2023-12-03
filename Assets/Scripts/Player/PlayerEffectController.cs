@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class PlayerEffectController : MonoBehaviour
 {
-    [SerializeField] PlayerController playerController;
+    [SerializeField] private VoidEventChannelSO playerAttackChannel;
     [SerializeField] private Animator attackEffectAnimator;
 
     private void OnEnable()
     {
-        playerController.OnAttack += PlayerController_OnAttack;
+        playerAttackChannel.OnEventRaised += PlayerController_OnAttack;
     }
 
     private void OnDisable()
     {
-        playerController.OnAttack -= PlayerController_OnAttack;
+        playerAttackChannel.OnEventRaised -= PlayerController_OnAttack;
     }
 
     private void PlayerController_OnAttack(object sender, EventArgs e)
