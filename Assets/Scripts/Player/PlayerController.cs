@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     
     public bool IsGrounded { get; private set; }
     
-    [SerializeField] private PlayerData settings;
+    [SerializeField] private PlayerDataSO settings;
     
     [Header("Grounding Check")]
     [SerializeField] private Transform groundCheck;

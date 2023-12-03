@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour, IDamageable
 {
-    [SerializeField] private EnemyData settings;
+    [SerializeField] private EnemyDataSO settings;
     [SerializeField] private SpriteRenderer spriteRenderer;
     
     private int currentHealth;
