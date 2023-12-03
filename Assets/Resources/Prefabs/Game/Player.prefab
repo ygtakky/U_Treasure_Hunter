@@ -239,7 +239,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e94493e2cb23c1e4baf27125ddc89325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 6725120623927914769}
+  playerAttackCompletedChannel: {fileID: 11400000, guid: 017123f3a6ca021409c51ef1d895e077, type: 2}
+  playerMoveChannel: {fileID: 11400000, guid: ed99c055a082a6f40ae104ccfa884648, type: 2}
+  playerStopMoveChannel: {fileID: 11400000, guid: ece1a1a04c214994a8920f25583bd161, type: 2}
+  playerJumpChannel: {fileID: 11400000, guid: 90156c99da7b74c4990383fc8147fbc9, type: 2}
+  playerFallChannel: {fileID: 11400000, guid: 6e80dc9b17d831548842c9335261ab98, type: 2}
+  playerLandChannel: {fileID: 11400000, guid: 13eac49126a6e394a945dbe59000acf3, type: 2}
+  playerAttackChannel: {fileID: 11400000, guid: 33b516330f2f5aa418851d500e07cd3a, type: 2}
 --- !u!1 &3444502811875883850
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,7 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e844bca0ea27ff408ae6dfd16fd1bf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 6725120623927914769}
+  playerAttackChannel: {fileID: 11400000, guid: 33b516330f2f5aa418851d500e07cd3a, type: 2}
   attackEffectAnimator: {fileID: 4891028564038820047}
 --- !u!1 &4740929248381678817
 GameObject:
@@ -462,6 +468,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8b3d678e5fd813048b57d609860a8d20, type: 2}
+  playerMoveChannel: {fileID: 11400000, guid: ed99c055a082a6f40ae104ccfa884648, type: 2}
+  playerStopMoveChannel: {fileID: 11400000, guid: ece1a1a04c214994a8920f25583bd161, type: 2}
+  playerJumpChannel: {fileID: 11400000, guid: 90156c99da7b74c4990383fc8147fbc9, type: 2}
+  playerFallChannel: {fileID: 11400000, guid: 6e80dc9b17d831548842c9335261ab98, type: 2}
+  playerLandChannel: {fileID: 11400000, guid: 13eac49126a6e394a945dbe59000acf3, type: 2}
+  playerAttackChannel: {fileID: 11400000, guid: 33b516330f2f5aa418851d500e07cd3a, type: 2}
+  playerAttackCompletedChannel: {fileID: 11400000, guid: 017123f3a6ca021409c51ef1d895e077, type: 2}
   groundCheck: {fileID: 7491828965691581863}
   groundLayer:
     serializedVersion: 2
@@ -470,3 +483,5 @@ MonoBehaviour:
   attackLayer:
     serializedVersion: 2
     m_Bits: 256
+  joystick: {fileID: 0}
+  isDesktopControlsEnabled: 0
