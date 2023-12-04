@@ -10,8 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2223446805649d429690a4b2591913a, type: 3}
-  m_Name: HorizontalPlatformSettings
+  m_Name: MovingPlatformSettings
   m_EditorClassIdentifier: 
-  platformType: 0
-  speed: 0.5
-  waitTime: 0
+  speed: 2
+  waitTime: 0.5

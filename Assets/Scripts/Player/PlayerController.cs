@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour, IDamageable
 {
     public bool IsGrounded { get; private set; }
+    public Vector2 PlatformSpeed { get; set; }
     
     [SerializeField] private PlayerDataSO settings;
     
@@ -91,6 +92,11 @@ public class PlayerController : MonoBehaviour, IDamageable
         newVelocity.x = horizontalInput * settings.movementSpeed * Time.fixedDeltaTime;
 
         rb.velocity = Vector2.Lerp(currentVelocity, newVelocity, 10.0f);
+
+        if (newVelocity.x == 0.0f)
+        {
+            rb.velocity += PlatformSpeed;
+        }
         
         if (rb.velocity.y < settings.maxFallSpeed)
         {
