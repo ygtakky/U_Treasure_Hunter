@@ -988,6 +988,10 @@ PrefabInstance:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 1573285236}
+    - target: {fileID: 6725120623927914769, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: isDesktopControlsEnabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7729272186413810596, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1448,63 +1452,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7729272186413810596, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
   m_PrefabInstance: {fileID: 687465510}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &7894110832118346922
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 513244371186631204, guid: b9d12019704ad514ea9c8172d54a4d8b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -4
-      objectReference: {fileID: 0}
-    - target: {fileID: 513244371186631204, guid: b9d12019704ad514ea9c8172d54a4d8b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 513244371186631204, guid: b9d12019704ad514ea9c8172d54a4d8b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 513244371186631204, guid: b9d12019704ad514ea9c8172d54a4d8b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 513244371186631204, guid: b9d12019704ad514ea9c8172d54a4d8b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 513244371186631204, guid: b9d12019704ad514ea9c8172d54a4d8b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 513244371186631204, guid: b9d12019704ad514ea9c8172d54a4d8b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 513244371186631204, guid: b9d12019704ad514ea9c8172d54a4d8b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 513244371186631204, guid: b9d12019704ad514ea9c8172d54a4d8b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 513244371186631204, guid: b9d12019704ad514ea9c8172d54a4d8b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1825334581634316401, guid: b9d12019704ad514ea9c8172d54a4d8b, type: 3}
-      propertyPath: m_Name
-      value: Moving Platform
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b9d12019704ad514ea9c8172d54a4d8b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1516,4 +1463,3 @@ SceneRoots:
   - {fileID: 643220685785595538}
   - {fileID: 346470817}
   - {fileID: 1134314528}
-  - {fileID: 7894110832118346922}
