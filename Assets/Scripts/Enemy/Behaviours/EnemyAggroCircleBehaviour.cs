@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(CircleCollider2D))]
@@ -21,7 +22,7 @@ public class EnemyAggroCircleBehaviour : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            aggroEntity.SetPlayerInRange(true);
+            StartCoroutine(DelayAggro());
         }
     }
 
@@ -29,7 +30,17 @@ public class EnemyAggroCircleBehaviour : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            StopCoroutine(DelayAggro());
+            
             aggroEntity.SetPlayerInRange(false);
         }
+    }
+    
+    private IEnumerator DelayAggro()
+    {
+        yield return new WaitForSeconds(settings.aggroStartDelay);
+        aggroEntity.SetPlayerInRange(true);
+
+        yield return null;
     }
 }

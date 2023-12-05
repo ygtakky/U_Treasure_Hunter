@@ -90,13 +90,13 @@ public class PlayerController : MonoBehaviour, IDamageable
         Vector2 newVelocity = currentVelocity;
         
         newVelocity.x = horizontalInput * settings.movementSpeed * Time.fixedDeltaTime;
-
-        rb.velocity = Vector2.Lerp(currentVelocity, newVelocity, 10.0f);
-
+        
         if (newVelocity.x == 0.0f)
         {
-            rb.velocity += new Vector2(PlatformSpeed.x, 0.0f);
+            newVelocity += new Vector2(PlatformSpeed.x, 0.0f);
         }
+
+        rb.velocity = Vector2.Lerp(currentVelocity, newVelocity, 10.0f);
         
         if (rb.velocity.y < settings.maxFallSpeed)
         {

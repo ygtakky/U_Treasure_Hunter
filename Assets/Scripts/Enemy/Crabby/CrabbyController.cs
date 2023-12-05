@@ -95,15 +95,23 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
     public void MoveTowards(Vector2 targetPosition)
     {
         Vector2 currentVelocity = rb2D.velocity;
+        Vector2 newVelocity = currentVelocity;
 
         float directionX = (targetPosition - rb2D.position).normalized.x;
         
         directionX = directionX > 0.0f ? 1.0f : -1.0f;
         
-        float moveVelocityX = settings.moveSpeed * directionX;
-        rb2D.velocity = Vector2.Lerp(currentVelocity, new Vector2(moveVelocityX, currentVelocity.y), settings.moveAcceleration * Time.fixedDeltaTime);
+        newVelocity.x = directionX * settings.moveSpeed * Time.fixedDeltaTime;
+        
+        rb2D.velocity = Vector2.Lerp(currentVelocity, newVelocity, settings.moveAcceleration);
+        
+        if (rb2D.velocity.y < settings.maxFallSpeed)
+        {
+            float clampedYSpeed = Mathf.Clamp(rb2D.velocity.y, -settings.maxFallSpeed, settings.maxFallSpeed);
+            rb2D.velocity = new Vector2(rb2D.velocity.x, clampedYSpeed);
+        }
 
-        ChangeDirection();
+        ChangeDirection(directionX);
         
         if (rb2D.velocity.x != 0.0f)
         {
@@ -111,21 +119,14 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
         }
     }
 
-    private void ChangeDirection()
+    private void ChangeDirection(float direction)
     {
-        if (rb2D.velocity.x < 0.0f)
-        {
-            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-        }
-        else if (rb2D.velocity.x > 0.0f)
-        {
-            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-        }
+        transform.localScale = new Vector3(-direction, 1.0f, 1.0f);
     }
 
     public void StopMoving()
     {
-        rb2D.velocity = Vector2.zero;
+        rb2D.velocity = new Vector2(0.0f, rb2D.velocity.y);
         
         OnMoveStop?.Invoke(this, EventArgs.Empty);
     }
