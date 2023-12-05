@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: CrabbyEnemySettings
   m_EditorClassIdentifier: 
   maxHealth: 2
+  moveSpeed: 1.5
+  moveAcceleration: 10
+  aggroRadius: 3
   sprite: {fileID: 21300000, guid: a64d6a24c9f6a4649b0a27a6a755fe14, type: 3}
