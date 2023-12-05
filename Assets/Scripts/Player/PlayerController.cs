@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
         if (newVelocity.x == 0.0f)
         {
-            rb.velocity += PlatformSpeed;
+            rb.velocity += new Vector2(PlatformSpeed.x, 0.0f);
         }
         
         if (rb.velocity.y < settings.maxFallSpeed)

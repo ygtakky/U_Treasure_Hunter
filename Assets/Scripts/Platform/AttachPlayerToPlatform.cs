@@ -29,6 +29,7 @@ public class AttachPlayerToPlatform : MonoBehaviour
         {
             playerController = other.GetComponent<PlayerController>();
             playerController.PlatformSpeed = platformRigidbody2D.velocity;
+            playerController.transform.SetParent(transform);
         }
     }
     
@@ -38,6 +39,7 @@ public class AttachPlayerToPlatform : MonoBehaviour
         {
             playerController.PlatformSpeed = Vector2.zero;
             playerController = null;
+            other.transform.SetParent(null);
         }
     }
 }
