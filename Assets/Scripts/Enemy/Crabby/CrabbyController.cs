@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroable
 {
+    public event EventHandler OnMove;
+    public event EventHandler OnMoveStop;
+    
     [Header("Configuration")]
     [SerializeField] private EnemyDataSO settings;
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -63,11 +66,18 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
         {
             spriteRenderer.flipX = true;
         }
+        
+        if (rb2D.velocity.x != 0.0f)
+        {
+            OnMove?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     public void StopMoving()
     {
         rb2D.velocity = Vector2.zero;
+        
+        OnMoveStop?.Invoke(this, EventArgs.Empty);
     }
     
 
