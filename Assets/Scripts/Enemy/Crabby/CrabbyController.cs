@@ -6,6 +6,7 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
     public event EventHandler OnMove;
     public event EventHandler OnMoveStop;
     public event EventHandler OnAttack;
+    public event EventHandler OnHit;
     
     [Header("Configuration")]
     [SerializeField] private EnemyDataSO settings;
@@ -165,6 +166,8 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
 
     public void TakeDamage(int damage)
     {
+        OnHit?.Invoke(this, EventArgs.Empty);
+        
         healthData.TakeDamage(damage);
 
         if (healthData.CurrentHealth < 0)
