@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f38b087606df6149bf06fdfe0d15ae8, type: 3}
-  m_Name: CollectiblePickupChannel
+  m_Name: EndingCollectiblePickup_Channel
   m_EditorClassIdentifier: 
