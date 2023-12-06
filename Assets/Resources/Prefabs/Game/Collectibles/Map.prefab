@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3845611922102268586, guid: 9afadb13e0b7baa49b75134e63c824a4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 45dec309c9244b24baf7f353fd048709, type: 3}
     - target: {fileID: 7452422648467994588, guid: 9afadb13e0b7baa49b75134e63c824a4, type: 3}
       propertyPath: m_Name
       value: Map
@@ -56,6 +60,10 @@ PrefabInstance:
       propertyPath: collectiblePickupChannel
       value: 
       objectReference: {fileID: 11400000, guid: ddaa6971789e208459841ed44a510107, type: 2}
+    - target: {fileID: 8559881857748561554, guid: 9afadb13e0b7baa49b75134e63c824a4, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -175,8 +175,6 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
             healthData.SetCurrentHealth(0);
             // TODO: Add enemy death logic
         }
-        
-        Debug.Log($"Enemy took {damage} damage. Current health: {healthData.CurrentHealth}");
     }
 
     public void SetPlayerInRange(bool value)

@@ -34,6 +34,6 @@ public class ScoreUI : MonoBehaviour
     
     private void UpdateText()
     {
-        scoreText.text = $"Score: {score}";
+        scoreText.text = $"{score}";
     }
 }
