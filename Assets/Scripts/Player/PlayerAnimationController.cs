@@ -14,6 +14,7 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] private VoidEventChannelSO playerFallChannel;
     [SerializeField] private VoidEventChannelSO playerLandChannel;
     [SerializeField] private VoidEventChannelSO playerAttackChannel;
+    [SerializeField] private VoidEventChannelSO playerHitChannel;
     
     private Animator animator;
     private string currentState;
@@ -33,6 +34,7 @@ public class PlayerAnimationController : MonoBehaviour
         playerFallChannel.OnEventRaised += PlayerFallChannel_OnFall;
         playerLandChannel.OnEventRaised += PlayerLandChannel_OnLand;
         playerAttackChannel.OnEventRaised += PlayerAttackChannel_OnAttack;
+        playerHitChannel.OnEventRaised += PlayerHitChannel_OnHit;
     }
 
     private void OnDisable()
@@ -43,6 +45,7 @@ public class PlayerAnimationController : MonoBehaviour
         playerFallChannel.OnEventRaised -= PlayerFallChannel_OnFall;
         playerLandChannel.OnEventRaised -= PlayerLandChannel_OnLand;
         playerAttackChannel.OnEventRaised -= PlayerAttackChannel_OnAttack;
+        playerHitChannel.OnEventRaised -= PlayerHitChannel_OnHit;
     }
     
     #endregion
@@ -94,6 +97,11 @@ public class PlayerAnimationController : MonoBehaviour
         ChangeState(PlayerAnimationStates.ATTACK);
     }
     
+    private void PlayerHitChannel_OnHit(object sender, EventArgs e)
+    {
+        ChangeState(PlayerAnimationStates.HIT);
+    }
+    
     #endregion
     
     private void ChangeState(string state)
@@ -113,8 +121,9 @@ public class PlayerAnimationController : MonoBehaviour
         bool isLanding = IsAnimationPlaying(PlayerAnimationStates.LAND);
         bool isAttacking = IsAnimationPlaying(PlayerAnimationStates.ATTACK);
         bool isJumping = IsAnimationPlaying(PlayerAnimationStates.JUMP);
+        bool isHit = IsAnimationPlaying(PlayerAnimationStates.HIT);
         
-        return !isLanding && !isAttacking && !isJumping;
+        return !isLanding && !isAttacking && !isJumping && !isHit;
     }
     
     private bool IsAnimationPlaying(string state)
@@ -133,6 +142,11 @@ public class PlayerAnimationController : MonoBehaviour
         
         ChangeState(PlayerAnimationStates.IDLE);
     }
+    
+    private void OnHitAnimationCompleted()
+    {
+        ChangeState(PlayerAnimationStates.IDLE);
+    }
 }
 
 public static class PlayerAnimationStates
@@ -143,4 +157,5 @@ public static class PlayerAnimationStates
     public const string FALL = "Player_Fall";
     public const string LAND = "Player_Land";
     public const string ATTACK = "Player_Attack";
+    public const string HIT = "Player_Hit";
 }

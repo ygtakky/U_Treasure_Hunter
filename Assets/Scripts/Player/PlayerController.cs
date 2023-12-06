@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private VoidEventChannelSO playerFallChannel;
     [SerializeField] private VoidEventChannelSO playerLandChannel;
     [SerializeField] private VoidEventChannelSO playerAttackChannel;
+    [SerializeField] private IntEventChannelSO playerHealthChangedChannel;
+    [SerializeField] private VoidEventChannelSO playerHitChannel;
     
     [Header("Listening Events")]
     [SerializeField] private VoidEventChannelSO playerAttackCompletedChannel;
@@ -47,7 +49,14 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    
+
+    private void Start()
+    {
+        currentHealth = settings.maxHealth;
+        
+        playerHealthChangedChannel.RaiseEvent(this, new IntEventArgs(currentHealth));
+    }
+
     private void OnEnable()
     {
         currentHealth = settings.maxHealth;
@@ -261,6 +270,8 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
+        playerHitChannel.RaiseEvent(this);
+        
         currentHealth -= damage;
 
         if (currentHealth < 0)
@@ -268,6 +279,6 @@ public class PlayerController : MonoBehaviour, IDamageable
             // TODO: Add player death logic
         }
         
-        Debug.Log($"Player took {damage} damage. Current health: {currentHealth}");
+        playerHealthChangedChannel.RaiseEvent(this, new IntEventArgs(currentHealth));
     }
 }
