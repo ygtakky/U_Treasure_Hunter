@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour, IDamageable
 {
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private VoidEventChannelSO playerAttackChannel;
     [SerializeField] private VoidEventChannelSO playerHealthChangedChannel;
     [SerializeField] private VoidEventChannelSO playerHitChannel;
+    [SerializeField] private AudioEventChannelSO sfxAudioEventChannel;
     
     [Header("Listening to")]
     [SerializeField] private VoidEventChannelSO playerAttackCompletedChannel;
@@ -37,6 +39,12 @@ public class PlayerController : MonoBehaviour, IDamageable
     [Header("Mobile Controls")]
     [SerializeField] private FixedJoystick joystick;
     [SerializeField] private bool isDesktopControlsEnabled;
+    
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip attackSfx;
+    [SerializeField] private AudioClip jumpSfx;
+    [SerializeField] private AudioClip landSfx;
+    [SerializeField] private AudioClip hitSfx;
     
     private Rigidbody2D rb;
     private float horizontalInput;
@@ -138,6 +146,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             rb.AddForce(Vector2.up * settings.jumpForce, ForceMode2D.Impulse);
             playerJumpChannel.RaiseEvent(this);
+            sfxAudioEventChannel.RaiseEvent(this, new AudioEventArgs(jumpSfx));
         }
         
         isJumpPressed = false;
@@ -153,6 +162,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             canAttack = false;
             playerAttackChannel.RaiseEvent(this);
+            sfxAudioEventChannel.RaiseEvent(this, new AudioEventArgs(attackSfx));
             
             Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, settings.attackRadius, attackLayer);
         
@@ -249,6 +259,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             wasJumping = false;
             playerLandChannel.RaiseEvent(this);
+            sfxAudioEventChannel.RaiseEvent(this, new AudioEventArgs(landSfx));
         }
         
     }
@@ -290,6 +301,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         playerHitChannel.RaiseEvent(this);
+        sfxAudioEventChannel.RaiseEvent(this, new AudioEventArgs(hitSfx));
         
         healthData.TakeDamage(damage);
 

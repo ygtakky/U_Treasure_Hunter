@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "IntEventChannel", menuName = "Events/Int Event Channel")]
+[CreateAssetMenu(fileName = "IntEventChannel", menuName = "Event Channels/Int Event Channel")]
 public class IntEventChannelSO : GenericEventChannelSO<IntEventArgs>
 {
     
