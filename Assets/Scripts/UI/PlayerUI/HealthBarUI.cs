@@ -7,10 +7,10 @@ using Random = UnityEngine.Random;
 public class HealthBarUI : MonoBehaviour
 {
     [Header("Listening Events")]
-    [SerializeField] private IntEventChannelSO playerHealthChangedChannel;
+    [SerializeField] private VoidEventChannelSO playerHealthChangedChannel;
     
     [Header("Configuration")]
-    [SerializeField] private PlayerDataSO settings;
+    [SerializeField] private HealthDataSO playerHealthData;
     [SerializeField] private Image healthBarImage;
     [SerializeField] private RectTransform healthBarRectTransform;
 
@@ -28,21 +28,21 @@ public class HealthBarUI : MonoBehaviour
         playerHealthChangedChannel.OnEventRaised -= PlayerHealthChangedChannel_OnEventRaised;
     }
     
-    private void PlayerHealthChangedChannel_OnEventRaised(object sender, IntEventArgs e)
+    private void PlayerHealthChangedChannel_OnEventRaised(object sender, EventArgs e)
     {
-        UpdateHealthBar(e.Value);
+        UpdateHealthBar();
     }
     
-    private void UpdateHealthBar(int currentHealth)
+    private void UpdateHealthBar()
     {
         StopAllCoroutines();
-        StartCoroutine(AnimateHealthBar(currentHealth));
+        StartCoroutine(AnimateHealthBar());
     }
     
-    private IEnumerator AnimateHealthBar(int currentHealth)
+    private IEnumerator AnimateHealthBar()
     {
         float from = healthBarImage.fillAmount;
-        float to = (float)currentHealth / settings.maxHealth;
+        float to = (float)playerHealthData.CurrentHealth / playerHealthData.MaxHealth;
         float t = 0f;
         
         // Shake the health bar if the player is damaged

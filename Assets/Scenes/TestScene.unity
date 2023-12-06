@@ -1409,9 +1409,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1573285236}
     - target: {fileID: 6725120623927914769, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: healthData
+      value: 
+      objectReference: {fileID: 11400000, guid: 8dc1ec48e3ee5184588f0f129770617b, type: 2}
+    - target: {fileID: 6725120623927914769, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
       propertyPath: playerHitChannel
       value: 
       objectReference: {fileID: 11400000, guid: ed1dac461d844bd48b5e549c0e6cf760, type: 2}
+    - target: {fileID: 6725120623927914769, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: playerHealthChangedChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 6891e2968598dbe45b9b72943cc3e2f2, type: 2}
     - target: {fileID: 7729272186413810596, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.75
@@ -1916,8 +1924,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a041ba2c0b0eb94ea60577e561c15f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealthChangedChannel: {fileID: 11400000, guid: 3ae06b91cc46c8a48b6df63ded9f58af, type: 2}
-  settings: {fileID: 11400000, guid: 8b3d678e5fd813048b57d609860a8d20, type: 2}
+  playerHealthChangedChannel: {fileID: 11400000, guid: 6891e2968598dbe45b9b72943cc3e2f2, type: 2}
+  playerHealthData: {fileID: 11400000, guid: 8dc1ec48e3ee5184588f0f129770617b, type: 2}
   healthBarImage: {fileID: 438800143}
   healthBarRectTransform: {fileID: 1032844665}
 --- !u!1 &1062883958

@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private VoidEventChannelSO playerFallChannel;
     [SerializeField] private VoidEventChannelSO playerLandChannel;
     [SerializeField] private VoidEventChannelSO playerAttackChannel;
-    [SerializeField] private IntEventChannelSO playerHealthChangedChannel;
+    [SerializeField] private VoidEventChannelSO playerHealthChangedChannel;
     [SerializeField] private VoidEventChannelSO playerHitChannel;
     
     [Header("Listening Events")]
@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask attackLayer;
     
+    [Header("Health Data")]
+    [SerializeField] private HealthDataSO healthData;
+    
     [Header("Mobile Controls")]
     [SerializeField] private FixedJoystick joystick;
     [SerializeField] private bool isDesktopControlsEnabled;
@@ -41,7 +44,6 @@ public class PlayerController : MonoBehaviour, IDamageable
     private bool isAttacking;
     private bool canAttack = true;
     private float attackTimer;
-    private int currentHealth;
     
     #region Unity Events
     
@@ -52,14 +54,15 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        currentHealth = settings.maxHealth;
+        healthData.SetMaxHealth(settings.maxHealth);
+        healthData.ResetHealth();
         
-        playerHealthChangedChannel.RaiseEvent(this, new IntEventArgs(currentHealth));
+        playerHealthChangedChannel.RaiseEvent(this);
     }
 
     private void OnEnable()
     {
-        currentHealth = settings.maxHealth;
+        healthData.SetCurrentHealth(settings.maxHealth);
         
         playerAttackCompletedChannel.OnEventRaised += OnAttackCompleted;
     }
@@ -272,13 +275,13 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         playerHitChannel.RaiseEvent(this);
         
-        currentHealth -= damage;
+        healthData.TakeDamage(damage);
 
-        if (currentHealth < 0)
+        if (healthData.CurrentHealth < 0)
         {
             // TODO: Add player death logic
         }
         
-        playerHealthChangedChannel.RaiseEvent(this, new IntEventArgs(currentHealth));
+        playerHealthChangedChannel.RaiseEvent(this);
     }
 }

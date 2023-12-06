@@ -11,19 +11,22 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
     [SerializeField] private EnemyDataSO settings;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Transform attackPoint;
+    [SerializeField][ReadOnly] private HealthDataSO healthData;
     
     private Rigidbody2D rb2D;
-    private int currentHealth;
     private bool isPlayerInRange;
     private bool isAttacking;
     private bool canAttack = true;
     private PlayerController playerController;
     private float attackTimer;
     
+    
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
         playerController = FindObjectOfType<PlayerController>();
+        
+        healthData = ScriptableObject.CreateInstance<HealthDataSO>();
     }
     
     private void Update()
@@ -66,7 +69,8 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
 
     private void OnEnable()
     {
-        currentHealth = settings.maxHealth;
+        healthData.SetMaxHealth(settings.maxHealth);
+        healthData.ResetHealth();
     }
     
     #if UNITY_EDITOR
@@ -161,15 +165,15 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        healthData.TakeDamage(damage);
 
-        if (currentHealth < 0)
+        if (healthData.CurrentHealth < 0)
         {
-            currentHealth = 0;
+            healthData.SetCurrentHealth(0);
             // TODO: Add enemy death logic
         }
         
-        Debug.Log($"Enemy took {damage} damage. Current health: {currentHealth}");
+        Debug.Log($"Enemy took {damage} damage. Current health: {healthData.CurrentHealth}");
     }
 
     public void SetPlayerInRange(bool value)
