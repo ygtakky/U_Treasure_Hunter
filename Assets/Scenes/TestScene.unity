@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 72266485}
   - component: {fileID: 72266487}
-  - component: {fileID: 72266486}
   m_Layer: 5
   m_Name: Attack Button
   m_TagString: Untagged
@@ -161,19 +160,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 187.70001, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &72266486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 72266484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56d4c1b16210de649a55a0fbb6890661, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  screenToToggle: {fileID: 0}
 --- !u!114 &72266487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,7 +203,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1776976991}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 687465511}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &91255615
 GameObject:
   m_ObjectHideFlags: 0
@@ -1417,6 +1415,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ed1dac461d844bd48b5e549c0e6cf760, type: 2}
     - target: {fileID: 6725120623927914769, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: jumpButtonClickedChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: b28c317c23e6d4d448cee53df32ec08d, type: 2}
+    - target: {fileID: 6725120623927914769, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+      propertyPath: attackButtonClickedChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 47dc6abeadb91dd4d960816301933e60, type: 2}
+    - target: {fileID: 6725120623927914769, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
       propertyPath: playerHealthChangedChannel
       value: 
       objectReference: {fileID: 11400000, guid: 6891e2968598dbe45b9b72943cc3e2f2, type: 2}
@@ -1469,6 +1475,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+--- !u!1 &687465511 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7760584761467799258, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}
+  m_PrefabInstance: {fileID: 687465510}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &731218724
 GameObject:
   m_ObjectHideFlags: 0
@@ -2373,7 +2384,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2080556928}
   - component: {fileID: 2080556930}
-  - component: {fileID: 2080556929}
   m_Layer: 5
   m_Name: Jump Button
   m_TagString: Untagged
@@ -2401,19 +2411,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 187.70001, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2080556929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2080556927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56d4c1b16210de649a55a0fbb6890661, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  screenToToggle: {fileID: 0}
 --- !u!114 &2080556930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2468,6 +2465,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2138545488}
   - component: {fileID: 2138545489}
+  - component: {fileID: 2138545490}
   m_Layer: 5
   m_Name: Buttons
   m_TagString: Untagged
@@ -2522,6 +2520,22 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &2138545490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138545487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ce619ab33892ce478f281b4e7920da9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackButtonClickedChannel: {fileID: 11400000, guid: 47dc6abeadb91dd4d960816301933e60, type: 2}
+  jumpButtonClickedChannel: {fileID: 11400000, guid: b28c317c23e6d4d448cee53df32ec08d, type: 2}
+  attackButton: {fileID: 72266487}
+  jumpButton: {fileID: 2080556930}
 --- !u!4 &7729272186493344294 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7729272186413810596, guid: 48eb79f2230b1fb4e9615fcc65163914, type: 3}

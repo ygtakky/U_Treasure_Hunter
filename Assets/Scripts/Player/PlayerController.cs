@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     
     [SerializeField] private PlayerDataSO settings;
     
-    [Header("Broadcasting Events")]
+    [Header("Broadcasting on")]
     [SerializeField] private VoidEventChannelSO playerMoveChannel;
     [SerializeField] private VoidEventChannelSO playerStopMoveChannel;
     [SerializeField] private VoidEventChannelSO playerJumpChannel;
@@ -18,8 +18,10 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private VoidEventChannelSO playerHealthChangedChannel;
     [SerializeField] private VoidEventChannelSO playerHitChannel;
     
-    [Header("Listening Events")]
+    [Header("Listening to")]
     [SerializeField] private VoidEventChannelSO playerAttackCompletedChannel;
+    [SerializeField] private VoidEventChannelSO attackButtonClickedChannel;
+    [SerializeField] private VoidEventChannelSO jumpButtonClickedChannel;
     
     [Header("Grounding Check")]
     [SerializeField] private Transform groundCheck;
@@ -65,11 +67,15 @@ public class PlayerController : MonoBehaviour, IDamageable
         healthData.SetCurrentHealth(settings.maxHealth);
         
         playerAttackCompletedChannel.OnEventRaised += OnAttackCompleted;
+        attackButtonClickedChannel.OnEventRaised += AttackButtonClickedChannel_OnAttackButtonClicked;
+        jumpButtonClickedChannel.OnEventRaised += JumpButtonClickedChannel_OnJumpButtonClicked;
     }
-    
+
     private void OnDisable()
     {
         playerAttackCompletedChannel.OnEventRaised -= OnAttackCompleted;
+        attackButtonClickedChannel.OnEventRaised -= AttackButtonClickedChannel_OnAttackButtonClicked;
+        jumpButtonClickedChannel.OnEventRaised -= JumpButtonClickedChannel_OnJumpButtonClicked;
     }
 
     private void Update()
@@ -177,6 +183,16 @@ public class PlayerController : MonoBehaviour, IDamageable
     private void OnAttackCompleted(object sender, EventArgs e)
     {
         isAttacking = false;
+    }
+    
+    private void AttackButtonClickedChannel_OnAttackButtonClicked(object sender, EventArgs e)
+    {
+        isAttackPressed = true;
+    }
+    
+    private void JumpButtonClickedChannel_OnJumpButtonClicked(object sender, EventArgs e)
+    {
+        isJumpPressed = true;
     }
     
     private void GetInputs()
