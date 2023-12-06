@@ -94,6 +94,8 @@ public class CrabbyAnimationController : MonoBehaviour
     
     private void OnHitAnimationEnd()
     {
+        controller.SetIsAttacking(false);
+        
         ChangeState(CrabbyAnimationStates.IDLE);
     }
 }
