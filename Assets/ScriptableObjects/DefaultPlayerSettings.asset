@@ -18,3 +18,4 @@ MonoBehaviour:
   maxFallSpeed: 8
   attackCooldown: 0.6
   attackRadius: 0.2
+  slideSpeed: 0.4

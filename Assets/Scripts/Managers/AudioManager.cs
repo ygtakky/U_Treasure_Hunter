@@ -31,6 +31,8 @@ public class AudioManager : MonoBehaviour
             audioSource.loop = false;
             audioSource.enabled = false;
         }
+        
+        DontDestroyOnLoad(this);
     }
 
     private void OnEnable()

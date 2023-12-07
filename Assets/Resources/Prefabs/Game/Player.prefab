@@ -246,6 +246,7 @@ MonoBehaviour:
   playerFallChannel: {fileID: 11400000, guid: 6e80dc9b17d831548842c9335261ab98, type: 2}
   playerLandChannel: {fileID: 11400000, guid: 13eac49126a6e394a945dbe59000acf3, type: 2}
   playerAttackChannel: {fileID: 11400000, guid: 33b516330f2f5aa418851d500e07cd3a, type: 2}
+  playerHitChannel: {fileID: 11400000, guid: ed1dac461d844bd48b5e549c0e6cf760, type: 2}
 --- !u!1 &3444502811875883850
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,8 +476,13 @@ MonoBehaviour:
   playerFallChannel: {fileID: 11400000, guid: 6e80dc9b17d831548842c9335261ab98, type: 2}
   playerLandChannel: {fileID: 11400000, guid: 13eac49126a6e394a945dbe59000acf3, type: 2}
   playerAttackChannel: {fileID: 11400000, guid: 33b516330f2f5aa418851d500e07cd3a, type: 2}
-  playerHealthChangedChannel: {fileID: 11400000, guid: 3ae06b91cc46c8a48b6df63ded9f58af, type: 2}
+  playerHealthChangedChannel: {fileID: 11400000, guid: 6891e2968598dbe45b9b72943cc3e2f2, type: 2}
+  playerHitChannel: {fileID: 11400000, guid: ed1dac461d844bd48b5e549c0e6cf760, type: 2}
+  sfxAudioEventChannel: {fileID: 11400000, guid: 13a392e228cd1134e84c738853c84440, type: 2}
+  cameraShakeEventChannel: {fileID: 11400000, guid: 4cd42a32e97268a4d93ca31c3210e4b2, type: 2}
   playerAttackCompletedChannel: {fileID: 11400000, guid: 017123f3a6ca021409c51ef1d895e077, type: 2}
+  attackButtonClickedChannel: {fileID: 11400000, guid: 47dc6abeadb91dd4d960816301933e60, type: 2}
+  jumpButtonClickedChannel: {fileID: 11400000, guid: b28c317c23e6d4d448cee53df32ec08d, type: 2}
   groundCheck: {fileID: 7491828965691581863}
   groundLayer:
     serializedVersion: 2
@@ -485,8 +491,13 @@ MonoBehaviour:
   attackLayer:
     serializedVersion: 2
     m_Bits: 256
+  healthData: {fileID: 11400000, guid: 8dc1ec48e3ee5184588f0f129770617b, type: 2}
   joystick: {fileID: 0}
   isDesktopControlsEnabled: 1
+  attackSfx: {fileID: 8300000, guid: 8770a5c34ccbb2a438c76c6d6c900c36, type: 3}
+  jumpSfx: {fileID: 8300000, guid: ca5ec4d18f3c42644a6dc9d2ad8656ad, type: 3}
+  landSfx: {fileID: 8300000, guid: 0d12434dc52de7f458a044ae6d20f30b, type: 3}
+  hitSfx: {fileID: 8300000, guid: 15194fc3fdca65143b7eef68c89ad885, type: 3}
 --- !u!1 &8203901370702466226
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,4 +9,5 @@ public class PlayerDataSO : ScriptableObject
     public float maxFallSpeed;
     public float attackCooldown;
     public float attackRadius;
+    public float slideSpeed;
 }

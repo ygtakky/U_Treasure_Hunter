@@ -61,6 +61,11 @@ public class PlayerController : MonoBehaviour, IDamageable
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        
+        if (joystick == null)
+        {
+            joystick = FindObjectOfType<FixedJoystick>();
+        }
     }
 
     private void Start()
@@ -98,6 +103,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         CheckGrounded();
         Jump();
         Move();
+        Slide();
         Attack();
     }
 
@@ -105,6 +111,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPoint.position, settings.attackRadius);
+        Gizmos.DrawLine(transform.position, transform.position + (horizontalInput * Vector3.right * 0.35f));
     }
 
     #endregion
@@ -177,6 +184,20 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
         
         isAttackPressed = false;
+    }
+    
+    private void Slide()
+    {
+        if (IsGrounded || IsJumping()) return;
+        
+        float inputDirection = horizontalInput;
+        
+        RaycastHit2D hit = Physics2D.CapsuleCast(transform.position, new Vector2(0.5f, 0.5f), CapsuleDirection2D.Vertical, 0.0f, inputDirection * Vector2.right, 0.25f, groundLayer);
+        
+        if (hit.collider != null)
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
     }
     
     private void UpdateAttackTimer()
