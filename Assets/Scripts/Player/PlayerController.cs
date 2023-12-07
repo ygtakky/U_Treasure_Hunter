@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private VoidEventChannelSO playerHealthChangedChannel;
     [SerializeField] private VoidEventChannelSO playerHitChannel;
     [SerializeField] private AudioEventChannelSO sfxAudioEventChannel;
+    [SerializeField] private CameraShakeEventChannelSO cameraShakeEventChannel;
     
     [Header("Listening to")]
     [SerializeField] private VoidEventChannelSO playerAttackCompletedChannel;
@@ -302,6 +303,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         playerHitChannel.RaiseEvent(this);
         sfxAudioEventChannel.RaiseEvent(this, new AudioEventArgs(hitSfx));
+        cameraShakeEventChannel.RaiseEvent(this, new CameraShakeEventArgs(0.1f, 0.1f, 0.1f));
         
         healthData.TakeDamage(damage);
 

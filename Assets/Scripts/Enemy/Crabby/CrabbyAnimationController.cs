@@ -20,6 +20,7 @@ public class CrabbyAnimationController : MonoBehaviour
         controller.OnMoveStop += Controller_OnMoveStop;
         controller.OnAttack += Controller_OnAttack;
         controller.OnHit += Controller_OnHit;
+        controller.OnDeath += Controller_OnDeath;
     }
 
     private void OnDisable()
@@ -28,6 +29,7 @@ public class CrabbyAnimationController : MonoBehaviour
         controller.OnMoveStop -= Controller_OnMoveStop;
         controller.OnAttack -= Controller_OnAttack;
         controller.OnHit -= Controller_OnHit;
+        controller.OnDeath -= Controller_OnDeath;
     }
     
     private void ChangeState(string state)
@@ -41,6 +43,8 @@ public class CrabbyAnimationController : MonoBehaviour
         
         currentState = state;
     }
+    
+    #region Event Handlers
     
     private void Controller_OnMove(object sender, EventArgs e)
     {
@@ -72,6 +76,13 @@ public class CrabbyAnimationController : MonoBehaviour
         ChangeState(CrabbyAnimationStates.HIT);
     }
     
+    private void Controller_OnDeath(object sender, EventArgs e)
+    {
+        ChangeState(CrabbyAnimationStates.DEATH);
+    }
+    
+    #endregion
+    
     private bool IsAnimationPlaying(string state)
     {
         return currentState == state && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1;
@@ -81,8 +92,9 @@ public class CrabbyAnimationController : MonoBehaviour
     {
         bool isAttacking = IsAnimationPlaying(CrabbyAnimationStates.ATTACK);
         bool isHit = IsAnimationPlaying(CrabbyAnimationStates.HIT);
+        bool isDying = IsAnimationPlaying(CrabbyAnimationStates.DEATH);
         
-        return !isAttacking && !isHit;
+        return !isAttacking && !isHit && !isDying;
     }
     
     private void OnAttackAnimationEnd()
@@ -98,6 +110,11 @@ public class CrabbyAnimationController : MonoBehaviour
         
         ChangeState(CrabbyAnimationStates.IDLE);
     }
+    
+    private void OnDeathAnimationEnd()
+    {
+        controller.Die();
+    }
 }
 
 public static class CrabbyAnimationStates
@@ -106,4 +123,5 @@ public static class CrabbyAnimationStates
     public static readonly string RUN = "Run";
     public static readonly string ATTACK = "Attack";
     public static readonly string HIT = "Hit";
+    public static readonly string DEATH = "Death";
 }

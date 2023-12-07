@@ -7,6 +7,7 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
     public event EventHandler OnMoveStop;
     public event EventHandler OnAttack;
     public event EventHandler OnHit;
+    public event EventHandler OnDeath;
     
     [Header("Configuration")]
     [SerializeField] private EnemyDataSO settings;
@@ -20,6 +21,7 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
     private bool canAttack = true;
     private PlayerController playerController;
     private float attackTimer;
+    private bool isDead;
     
     
     private void Awake()
@@ -32,6 +34,11 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
     
     private void Update()
     {
+        if (isDead)
+        {
+            return;
+        }
+        
         if (!canAttack)
         {
             attackTimer += Time.deltaTime;
@@ -46,6 +53,11 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
 
     private void FixedUpdate()
     {
+        if (isDead)
+        {
+            return;
+        }
+        
         if (isPlayerInRange)
         {
             if (GetSqrDistanceToPlayer() <= settings.attackRange * settings.attackRange)
@@ -170,10 +182,13 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
         
         healthData.TakeDamage(damage);
 
-        if (healthData.CurrentHealth < 0)
+        if (healthData.CurrentHealth <= 0)
         {
             healthData.SetCurrentHealth(0);
-            // TODO: Add enemy death logic
+            isDead = true;
+            Vector2 direction = (Vector2)(transform.position - playerController.transform.position).normalized + Vector2.up;
+            rb2D.AddForce(direction * 2f, ForceMode2D.Impulse);
+            OnDeath?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -185,5 +200,10 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
     public void SetIsAttacking(bool value)
     {
         isAttacking = value;
+    }
+    
+    public void Die()
+    {
+        Destroy(gameObject);
     }
 }
