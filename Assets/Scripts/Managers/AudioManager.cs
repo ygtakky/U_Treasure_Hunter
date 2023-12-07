@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
@@ -10,6 +12,10 @@ public class AudioManager : MonoBehaviour
     [Header("Configuration")]
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource[] sfxSources;
+    [SerializeField] private AudioMixerGroup musicMixerGroup;
+    [SerializeField] private AudioMixerGroup sfxMixerGroup;
+    [SerializeField][Range(-80, 20)] private int sfxVolume;
+    [SerializeField][Range(-80, 20)] private int musicVolume;
     
     private const int MAX_NUMBER_OF_SFX_SOURCES = 10;
 
@@ -33,6 +39,12 @@ public class AudioManager : MonoBehaviour
         }
         
         DontDestroyOnLoad(this);
+    }
+
+    private void Start()
+    {
+        musicMixerGroup.audioMixer.SetFloat("MusicVolume", musicVolume);
+        sfxMixerGroup.audioMixer.SetFloat("SFXVolume", sfxVolume);
     }
 
     private void OnEnable()

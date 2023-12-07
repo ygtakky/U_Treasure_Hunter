@@ -175,6 +175,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9096624998724722354, guid: 967861ca2477d7b4d8aaf9cf72178018, type: 3}
+      propertyPath: sfxVolume
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9096624998724722354, guid: 967861ca2477d7b4d8aaf9cf72178018, type: 3}
+      propertyPath: musicVolume
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9096624998724722354, guid: 967861ca2477d7b4d8aaf9cf72178018, type: 3}
+      propertyPath: sfxMixerGroup
+      value: 
+      objectReference: {fileID: -4195145413011413016, guid: 0be6b398f2ca0004f8f8e3cf4e621187, type: 2}
+    - target: {fileID: 9096624998724722354, guid: 967861ca2477d7b4d8aaf9cf72178018, type: 3}
+      propertyPath: musicMixerGroup
+      value: 
+      objectReference: {fileID: -7988183842214790915, guid: 0be6b398f2ca0004f8f8e3cf4e621187, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
