@@ -343,6 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd5a791ffc7d00f4a851510e4ed9f9a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxAudioEventChannel: {fileID: 11400000, guid: 13a392e228cd1134e84c738853c84440, type: 2}
   settings: {fileID: 11400000, guid: 1276dc9f9b123914da6f1a5196b6b517, type: 2}
   spriteRenderer: {fileID: 3401568725074362996}
   attackPoint: {fileID: 2565260609153805446}

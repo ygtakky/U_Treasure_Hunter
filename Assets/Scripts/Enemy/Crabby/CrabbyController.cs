@@ -8,6 +8,9 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
     public event EventHandler OnAttack;
     public event EventHandler OnHit;
     public event EventHandler OnDeath;
+
+    [Header("Broadcasting on")] 
+    [SerializeField] private AudioEventChannelSO sfxAudioEventChannel;
     
     [Header("Configuration")]
     [SerializeField] private EnemyDataSO settings;
@@ -185,6 +188,7 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
     public void TakeDamage(int damage)
     {
         OnHit?.Invoke(this, EventArgs.Empty);
+        sfxAudioEventChannel.RaiseEvent(this, new AudioEventArgs(settings.hitSFX));
         
         healthData.TakeDamage(damage);
 

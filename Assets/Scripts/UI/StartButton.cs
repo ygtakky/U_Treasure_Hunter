@@ -1,7 +1,10 @@
-using UnityEngine.SceneManagement;
+using UnityEngine;
 
 public class StartButton : BaseButton
 {
+    [SerializeField] private SceneEventChannelSO sceneChangedEventChannel;
+    [SerializeField] private SceneDataSO sceneToLoad;
+    
     protected override void Start()
     {
         base.Start();
@@ -11,6 +14,6 @@ public class StartButton : BaseButton
 
     private void LoadGame()
     {
-        SceneManager.LoadScene("GameScene");
+        sceneChangedEventChannel.RaiseEvent(this, new SceneEventArgs(sceneToLoad));
     }
 }
