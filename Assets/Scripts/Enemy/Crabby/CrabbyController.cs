@@ -160,11 +160,17 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
             isAttacking = true;
 
             Collider2D[] results = new Collider2D[1];
-            Physics2D.OverlapCircleNonAlloc(attackPoint.position, 0.1f, results, LayerMask.GetMask("Player"));
+            int numberOfResults = Physics2D.OverlapCircleNonAlloc(attackPoint.position, 0.1f, results, LayerMask.GetMask("Player"));
             
-            if (results[0] != null)
+            if (numberOfResults > 0)
             {
-                results[0].GetComponent<DamageTrigger>()?.TakeDamage(settings.attackDamage);
+                foreach (Collider2D result in results)
+                {
+                    if (result.TryGetComponent(out DamageTrigger damageTrigger))
+                    {
+                        damageTrigger.TakeDamage(settings.attackDamage);
+                    }
+                }
             }
         
             OnAttack?.Invoke(this, EventArgs.Empty); 
