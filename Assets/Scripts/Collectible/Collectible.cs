@@ -5,11 +5,13 @@ public class Collectible : MonoBehaviour
 {
     [Header("Broadcasting Events")]
     [SerializeField] private IntEventChannelSO collectiblePickupChannel;
+    [SerializeField] private AudioEventChannelSO sfxChannel;
     
     public event EventHandler CollectiblePickedUp;
     
     [Header("Configuration")]
     [SerializeField] private CollectibleDataSO settings;
+    [SerializeField] private AudioClip collectSFX;
     
     private bool isCollected;
     
@@ -26,6 +28,7 @@ public class Collectible : MonoBehaviour
     {
         isCollected = true;
         collectiblePickupChannel.RaiseEvent(this, new IntEventArgs(settings.scoreValue));
+        sfxChannel.RaiseEvent(this, new AudioEventArgs(collectSFX));
         CollectiblePickedUp?.Invoke(this, EventArgs.Empty);
     }
     

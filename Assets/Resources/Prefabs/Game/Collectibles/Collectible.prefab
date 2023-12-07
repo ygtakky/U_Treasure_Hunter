@@ -202,4 +202,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectiblePickupChannel: {fileID: 11400000, guid: 78e27cf797ea1b849b966a473a029b9d, type: 2}
+  sfxChannel: {fileID: 11400000, guid: 13a392e228cd1134e84c738853c84440, type: 2}
   settings: {fileID: 11400000, guid: b41f22cbe111eae479e2d63230db4e18, type: 2}
+  collectSFX: {fileID: 8300000, guid: 11bbc95ecbbda574997a6da0ed7adbef, type: 3}
