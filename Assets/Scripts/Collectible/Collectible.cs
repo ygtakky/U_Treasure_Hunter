@@ -4,7 +4,7 @@ using UnityEngine;
 public class Collectible : MonoBehaviour
 {
     [Header("Broadcasting Events")]
-    [SerializeField] private IntEventChannelSO collectiblePickupChannel;
+    [SerializeField] private IntEventChannelSO scoreChannel;
     [SerializeField] private AudioEventChannelSO sfxChannel;
     
     public event EventHandler CollectiblePickedUp;
@@ -27,7 +27,7 @@ public class Collectible : MonoBehaviour
     private void OnPickup()
     {
         isCollected = true;
-        collectiblePickupChannel.RaiseEvent(this, new IntEventArgs(settings.scoreValue));
+        scoreChannel.RaiseEvent(this, new IntEventArgs(settings.scoreValue));
         sfxChannel.RaiseEvent(this, new AudioEventArgs(collectSFX));
         CollectiblePickedUp?.Invoke(this, EventArgs.Empty);
     }

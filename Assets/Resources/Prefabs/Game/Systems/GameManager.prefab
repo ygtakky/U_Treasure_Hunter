@@ -46,6 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameWonChannel: {fileID: 11400000, guid: 7eb46c3339ba9ea4f8b7ca1e7c04e6fe, type: 2}
   gameLostChannel: {fileID: 11400000, guid: 3c259c71bf97ee944aa3d2471b16d602, type: 2}
-  collectiblePickupChannel: {fileID: 11400000, guid: 78e27cf797ea1b849b966a473a029b9d, type: 2}
+  scoreChannel: {fileID: 11400000, guid: 78e27cf797ea1b849b966a473a029b9d, type: 2}
   endingCollectiblePickupChannel: {fileID: 11400000, guid: ddaa6971789e208459841ed44a510107, type: 2}
   playerDeathChannel: {fileID: 11400000, guid: 1df08051f2c0ef14c86bf2a7d1128809, type: 2}

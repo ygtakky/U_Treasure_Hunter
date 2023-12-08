@@ -11,6 +11,7 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
 
     [Header("Broadcasting on")] 
     [SerializeField] private AudioEventChannelSO sfxAudioEventChannel;
+    [SerializeField] private IntEventChannelSO scoreEventChannel;
     
     [Header("Configuration")]
     [SerializeField] private EnemyDataSO settings;
@@ -199,6 +200,7 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
             Vector2 direction = (Vector2)(transform.position - playerController.transform.position).normalized + Vector2.up;
             rb2D.AddForce(direction * 2f, ForceMode2D.Impulse);
             OnDeath?.Invoke(this, EventArgs.Empty);
+            scoreEventChannel.RaiseEvent(this, new IntEventArgs(settings.scoreValue));
         }
     }
     

@@ -1324,7 +1324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72a7815f96ebe8646a727eb55531332f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectiblePickupChannel: {fileID: 11400000, guid: 78e27cf797ea1b849b966a473a029b9d, type: 2}
+  scoreChannel: {fileID: 11400000, guid: 78e27cf797ea1b849b966a473a029b9d, type: 2}
   endingCollectiblePickupChannel: {fileID: 11400000, guid: ddaa6971789e208459841ed44a510107, type: 2}
   scoreText: {fileID: 4966627289324711563}
 --- !u!114 &3174417945721373454

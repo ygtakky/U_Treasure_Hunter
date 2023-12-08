@@ -12,6 +12,7 @@ public class EnemyDataSO : ScriptableObject
     public float attackCooldown;
     public float aggroRadius;
     public float aggroStartDelay;
+    public int scoreValue;
     public Sprite sprite;
     public AudioClip hitSFX;
 }

@@ -21,7 +21,10 @@ public class BaseButton : BaseUI
 
     private void OnDestroy()
     {
-        button.onClick.RemoveAllListeners();
+        if (button != null)
+        {
+            button.onClick.RemoveAllListeners();
+        }
     }
 
     protected void AddOnClickListener(Action action)

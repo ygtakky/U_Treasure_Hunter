@@ -2,15 +2,21 @@ using UnityEngine;
 
 public class QuitButton : BaseButton
 {
+    [Header("Broadcasting on")]
+    [SerializeField] private SceneEventChannelSO sceneChangeChannel;
+
+    [Header("Configuration")] [SerializeField]
+    private SceneDataSO mainMenuSceneData;
+    
     protected override void Start()
     {
         base.Start();
         
-        AddOnClickListener(QuitGame);
+        AddOnClickListener(OpenMainMenu);
     }
     
-    private void QuitGame()
+    private void OpenMainMenu()
     {
-        Application.Quit();
+        sceneChangeChannel.RaiseEvent(this, new SceneEventArgs(mainMenuSceneData));
     }
 }

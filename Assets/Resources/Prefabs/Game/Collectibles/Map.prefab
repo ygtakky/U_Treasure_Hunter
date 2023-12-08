@@ -61,6 +61,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 8ac6649c314f51b4587ad53f5fb46b4a, type: 2}
     - target: {fileID: 7965083025933945968, guid: 9afadb13e0b7baa49b75134e63c824a4, type: 3}
+      propertyPath: scoreChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: ddaa6971789e208459841ed44a510107, type: 2}
+    - target: {fileID: 7965083025933945968, guid: 9afadb13e0b7baa49b75134e63c824a4, type: 3}
       propertyPath: collectiblePickupChannel
       value: 
       objectReference: {fileID: 11400000, guid: ddaa6971789e208459841ed44a510107, type: 2}

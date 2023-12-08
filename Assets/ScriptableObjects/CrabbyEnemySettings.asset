@@ -21,5 +21,6 @@ MonoBehaviour:
   attackCooldown: 2
   aggroRadius: 2.1
   aggroStartDelay: 0.2
+  scoreValue: 4
   sprite: {fileID: 21300000, guid: a64d6a24c9f6a4649b0a27a6a755fe14, type: 3}
   hitSFX: {fileID: 8300000, guid: 4c5a57289d195684f889364b2f458603, type: 3}

@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private IntEventChannelSO gameLostChannel;
     
     [Header("Listening Channels")]
-    [SerializeField] private IntEventChannelSO collectiblePickupChannel;
+    [SerializeField] private IntEventChannelSO scoreChannel;
     [SerializeField] private IntEventChannelSO endingCollectiblePickupChannel;
     [SerializeField] private VoidEventChannelSO playerDeathChannel;
 
@@ -16,19 +16,19 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        collectiblePickupChannel.OnEventRaised += CollectiblePickupChannel_OnEventRaised;
+        scoreChannel.OnEventRaised += ScoreChannel_OnEventRaised;
         endingCollectiblePickupChannel.OnEventRaised += EndingCollectiblePickupChannel_OnEventRaised;
         playerDeathChannel.OnEventRaised += PlayerDeathChannel_OnEventRaised;
     }
 
     private void OnDisable()
     {
-        collectiblePickupChannel.OnEventRaised -= CollectiblePickupChannel_OnEventRaised;
+        scoreChannel.OnEventRaised -= ScoreChannel_OnEventRaised;
         endingCollectiblePickupChannel.OnEventRaised -= EndingCollectiblePickupChannel_OnEventRaised;
         playerDeathChannel.OnEventRaised -= PlayerDeathChannel_OnEventRaised;
     }
 
-    private void CollectiblePickupChannel_OnEventRaised(object sender, IntEventArgs e)
+    private void ScoreChannel_OnEventRaised(object sender, IntEventArgs e)
     {
         score += e.Value;
     }

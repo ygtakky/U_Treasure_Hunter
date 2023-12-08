@@ -15,13 +15,10 @@ public class GameOverUI : BaseUI
 
     private void Start()
     {
-        Hide();
-    }
-
-    private void OnEnable()
-    {
         gameWonChannel.OnEventRaised += GameWonChannel_OnEventRaised;
         gameLostChannel.OnEventRaised += GameLostChannel_OnEventRaised;
+        
+        Hide();
     }
     
     private void OnDestroy()

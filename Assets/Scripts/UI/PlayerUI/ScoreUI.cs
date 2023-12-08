@@ -4,7 +4,7 @@ using UnityEngine;
 public class ScoreUI : MonoBehaviour
 {
     [Header("Listening Events")]
-    [SerializeField] private IntEventChannelSO collectiblePickupChannel;
+    [SerializeField] private IntEventChannelSO scoreChannel;
     [SerializeField] private IntEventChannelSO endingCollectiblePickupChannel;
     
     [Header("Configuration")]
@@ -19,17 +19,17 @@ public class ScoreUI : MonoBehaviour
     
     private void OnEnable()
     {
-        collectiblePickupChannel.OnEventRaised += CollectiblePickupChannel_OnEventRaised;
-        endingCollectiblePickupChannel.OnEventRaised += CollectiblePickupChannel_OnEventRaised;
+        scoreChannel.OnEventRaised += ScoreChannel_OnEventRaised;
+        endingCollectiblePickupChannel.OnEventRaised += ScoreChannel_OnEventRaised;
     }
 
     private void OnDisable()
     {
-        collectiblePickupChannel.OnEventRaised -= CollectiblePickupChannel_OnEventRaised;
-        endingCollectiblePickupChannel.OnEventRaised -= CollectiblePickupChannel_OnEventRaised;
+        scoreChannel.OnEventRaised -= ScoreChannel_OnEventRaised;
+        endingCollectiblePickupChannel.OnEventRaised -= ScoreChannel_OnEventRaised;
     }
     
-    private void CollectiblePickupChannel_OnEventRaised(object sender, IntEventArgs e)
+    private void ScoreChannel_OnEventRaised(object sender, IntEventArgs e)
     {
         score += e.Value;
         UpdateText();
