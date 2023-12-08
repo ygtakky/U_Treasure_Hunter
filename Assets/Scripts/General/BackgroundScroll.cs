@@ -29,7 +29,7 @@ public class BackgroundScroll : MonoBehaviour
         
         if (backgroundList.Count > 1 && backgroundList[0].position.x < -28)
         {
-            backgroundList[0].position = new Vector3(backgroundList[1].position.x + 28, backgroundList[0].position.y, backgroundList[0].position.z);
+            backgroundList[0].position = new Vector3(backgroundList[^1].position.x + 28, backgroundList[0].position.y, backgroundList[0].position.z);
             backgroundList.Add(backgroundList[0]);
             backgroundList.RemoveAt(0);
         }

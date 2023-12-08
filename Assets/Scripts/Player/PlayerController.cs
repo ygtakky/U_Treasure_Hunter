@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private VoidEventChannelSO playerAttackChannel;
     [SerializeField] private VoidEventChannelSO playerHealthChangedChannel;
     [SerializeField] private VoidEventChannelSO playerHitChannel;
+    [SerializeField] private VoidEventChannelSO playerDeathChannel;
     [SerializeField] private AudioEventChannelSO sfxAudioEventChannel;
     [SerializeField] private CameraShakeEventChannelSO cameraShakeEventChannel;
     
@@ -55,6 +56,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private bool isAttacking;
     private bool canAttack = true;
     private float attackTimer;
+    private bool isDead;
     
     #region Unity Events
     
@@ -94,12 +96,16 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void Update()
     {
+        if (isDead) return;
+        
         GetInputs();
         UpdateAttackTimer();
     }
 
     private void FixedUpdate()
     {
+        if (isDead) return;
+        
         CheckGrounded();
         Jump();
         Move();
@@ -322,15 +328,18 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
+        if (isDead) return;
+        
         playerHitChannel.RaiseEvent(this);
         sfxAudioEventChannel.RaiseEvent(this, new AudioEventArgs(hitSfx));
         cameraShakeEventChannel.RaiseEvent(this, new CameraShakeEventArgs(0.1f, 0.1f, 0.1f));
         
         healthData.TakeDamage(damage);
 
-        if (healthData.CurrentHealth < 0)
+        if (healthData.CurrentHealth <= 0)
         {
-            // TODO: Add player death logic
+            playerDeathChannel.RaiseEvent(this);
+            isDead = true;
         }
         
         playerHealthChangedChannel.RaiseEvent(this);

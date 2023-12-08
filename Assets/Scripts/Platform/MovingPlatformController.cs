@@ -57,8 +57,6 @@ public class MovingPlatformController : MonoBehaviour
             currentPatrolPointIndex = 0;
         }
     }
-
-    #if UNITY_EDITOR
     
     [ContextMenu("Get Patrol Points")]
     private void GetPatrolPoints()
@@ -72,6 +70,8 @@ public class MovingPlatformController : MonoBehaviour
             patrolPoints[i] = patrolPointsParent.GetChild(i);
         }
     }
+
+    #if UNITY_EDITOR
 
     private void OnDrawGizmos()
     {
@@ -88,6 +88,13 @@ public class MovingPlatformController : MonoBehaviour
         }
     }
     
+    private void OnValidate()
+    {
+        GetPatrolPoints();
+    }
+    
+    #endif
+    
     private void DrawPatrolPoint(int index)
     {
         Gizmos.DrawCube(patrolPoints[index].position, Vector3.one * 0.2f);
@@ -100,11 +107,4 @@ public class MovingPlatformController : MonoBehaviour
             Gizmos.DrawLine(patrolPoints[index].position, patrolPoints[index + 1].position);
         }
     }
-
-    private void OnValidate()
-    {
-        GetPatrolPoints();
-    }
-
-#endif
 }

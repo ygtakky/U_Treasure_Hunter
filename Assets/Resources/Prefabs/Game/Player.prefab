@@ -94,7 +94,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 639379879
-  m_SortingLayer: 11
+  m_SortingLayer: 12
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 63a29766214d4ab469057880d8db1cf6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -247,6 +247,7 @@ MonoBehaviour:
   playerLandChannel: {fileID: 11400000, guid: 13eac49126a6e394a945dbe59000acf3, type: 2}
   playerAttackChannel: {fileID: 11400000, guid: 33b516330f2f5aa418851d500e07cd3a, type: 2}
   playerHitChannel: {fileID: 11400000, guid: ed1dac461d844bd48b5e549c0e6cf760, type: 2}
+  playerDeathChannel: {fileID: 11400000, guid: 1df08051f2c0ef14c86bf2a7d1128809, type: 2}
 --- !u!1 &3444502811875883850
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,6 +479,7 @@ MonoBehaviour:
   playerAttackChannel: {fileID: 11400000, guid: 33b516330f2f5aa418851d500e07cd3a, type: 2}
   playerHealthChangedChannel: {fileID: 11400000, guid: 6891e2968598dbe45b9b72943cc3e2f2, type: 2}
   playerHitChannel: {fileID: 11400000, guid: ed1dac461d844bd48b5e549c0e6cf760, type: 2}
+  playerDeathChannel: {fileID: 11400000, guid: 1df08051f2c0ef14c86bf2a7d1128809, type: 2}
   sfxAudioEventChannel: {fileID: 11400000, guid: 13a392e228cd1134e84c738853c84440, type: 2}
   cameraShakeEventChannel: {fileID: 11400000, guid: 4cd42a32e97268a4d93ca31c3210e4b2, type: 2}
   playerAttackCompletedChannel: {fileID: 11400000, guid: 017123f3a6ca021409c51ef1d895e077, type: 2}
@@ -493,7 +495,7 @@ MonoBehaviour:
     m_Bits: 256
   healthData: {fileID: 11400000, guid: 8dc1ec48e3ee5184588f0f129770617b, type: 2}
   joystick: {fileID: 0}
-  isDesktopControlsEnabled: 1
+  isDesktopControlsEnabled: 0
   attackSfx: {fileID: 8300000, guid: 8770a5c34ccbb2a438c76c6d6c900c36, type: 3}
   jumpSfx: {fileID: 8300000, guid: ca5ec4d18f3c42644a6dc9d2ad8656ad, type: 3}
   landSfx: {fileID: 8300000, guid: 0d12434dc52de7f458a044ae6d20f30b, type: 3}

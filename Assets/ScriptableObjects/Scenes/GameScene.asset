@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26da669a35cfa61498f220253df56df2, type: 3}
   m_Name: GameScene
   m_EditorClassIdentifier: 
-  scene: {fileID: 102900000, guid: 3fc8acdd13e6c734bafef6554d6fdbcd, type: 3}
+  sceneName: GameScene
   music: {fileID: 8300000, guid: a0324b87f9d5c0d498376f472ab30d45, type: 3}

@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - PlayerDamage
   layers:
   - Default
   - TransparentFX
@@ -68,6 +69,9 @@ TagManager:
     locked: 0
   - name: Traps
     uniqueID: 61436203
+    locked: 0
+  - name: Platforms
+    uniqueID: 2630901525
     locked: 0
   - name: Collectibles
     uniqueID: 1899353509

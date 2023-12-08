@@ -15,6 +15,7 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] private VoidEventChannelSO playerLandChannel;
     [SerializeField] private VoidEventChannelSO playerAttackChannel;
     [SerializeField] private VoidEventChannelSO playerHitChannel;
+    [SerializeField] private VoidEventChannelSO playerDeathChannel;
     
     private Animator animator;
     private string currentState;
@@ -35,6 +36,7 @@ public class PlayerAnimationController : MonoBehaviour
         playerLandChannel.OnEventRaised += PlayerLandChannel_OnLand;
         playerAttackChannel.OnEventRaised += PlayerAttackChannel_OnAttack;
         playerHitChannel.OnEventRaised += PlayerHitChannel_OnHit;
+        playerDeathChannel.OnEventRaised += PlayerDeathChannel_OnDeath;
     }
 
     private void OnDisable()
@@ -46,6 +48,7 @@ public class PlayerAnimationController : MonoBehaviour
         playerLandChannel.OnEventRaised -= PlayerLandChannel_OnLand;
         playerAttackChannel.OnEventRaised -= PlayerAttackChannel_OnAttack;
         playerHitChannel.OnEventRaised -= PlayerHitChannel_OnHit;
+        playerDeathChannel.OnEventRaised -= PlayerDeathChannel_OnDeath;
     }
     
     #endregion
@@ -100,6 +103,11 @@ public class PlayerAnimationController : MonoBehaviour
     private void PlayerHitChannel_OnHit(object sender, EventArgs e)
     {
         ChangeState(PlayerAnimationStates.HIT);
+    }
+    
+    private void PlayerDeathChannel_OnDeath(object sender, EventArgs e)
+    {
+        ChangeState(PlayerAnimationStates.DEATH);
     }
     
     #endregion
@@ -158,4 +166,5 @@ public static class PlayerAnimationStates
     public const string LAND = "Player_Land";
     public const string ATTACK = "Player_Attack";
     public const string HIT = "Player_Hit";
+    public const string DEATH = "Player_Death";
 }

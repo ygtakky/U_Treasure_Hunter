@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultPlayerSettings
   m_EditorClassIdentifier: 
   maxHealth: 10
-  movementSpeed: 300
+  movementSpeed: 200
   jumpForce: 6
   maxFallSpeed: 8
   attackCooldown: 0.6

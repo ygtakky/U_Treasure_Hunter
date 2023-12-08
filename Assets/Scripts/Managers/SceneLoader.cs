@@ -10,8 +10,20 @@ public class SceneLoader : MonoBehaviour
     
     [Header("Listening to")]
     [SerializeField] private SceneEventChannelSO sceneEventChannel;
+    
+    [Header("Debugging")]
+    [SerializeField] private bool playDebugScene;
+    [SerializeField] private SceneDataSO debugSceneData;
 
     private bool isLoadingScene;
+
+    private void Start()
+    {
+        if (playDebugScene)
+        {
+            sceneEventChannel.RaiseEvent(this, new SceneEventArgs(debugSceneData));
+        }
+    }
 
     private void OnEnable()
     {
@@ -45,12 +57,12 @@ public class SceneLoader : MonoBehaviour
             yield return null;
         }
         
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneData.scene.name, LoadSceneMode.Additive);
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneData.sceneName, LoadSceneMode.Additive);
         asyncOperation.allowSceneActivation = false;
         
         asyncOperation.completed += (obj) =>
         {
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneData.scene.name));
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneData.sceneName));
         };
 
         while (!asyncOperation.isDone)

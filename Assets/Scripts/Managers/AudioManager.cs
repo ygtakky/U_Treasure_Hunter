@@ -59,6 +59,11 @@ public class AudioManager : MonoBehaviour
     
     private void MusicEventChannel_OnEventRaised(object sender, AudioEventArgs e)
     {
+        if (musicSource.clip == e.audioClip)
+        {
+            return;
+        }
+        
         PlayMusic(e.audioClip);
     }
     
