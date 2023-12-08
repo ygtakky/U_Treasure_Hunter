@@ -485,6 +485,7 @@ MonoBehaviour:
   playerAttackCompletedChannel: {fileID: 11400000, guid: 017123f3a6ca021409c51ef1d895e077, type: 2}
   attackButtonClickedChannel: {fileID: 11400000, guid: 47dc6abeadb91dd4d960816301933e60, type: 2}
   jumpButtonClickedChannel: {fileID: 11400000, guid: b28c317c23e6d4d448cee53df32ec08d, type: 2}
+  gameWonChannel: {fileID: 11400000, guid: 7eb46c3339ba9ea4f8b7ca1e7c04e6fe, type: 2}
   groundCheck: {fileID: 7491828965691581863}
   groundLayer:
     serializedVersion: 2
@@ -495,7 +496,7 @@ MonoBehaviour:
     m_Bits: 256
   healthData: {fileID: 11400000, guid: 8dc1ec48e3ee5184588f0f129770617b, type: 2}
   joystick: {fileID: 0}
-  isDesktopControlsEnabled: 0
+  isDesktopControlsEnabled: 1
   attackSfx: {fileID: 8300000, guid: 8770a5c34ccbb2a438c76c6d6c900c36, type: 3}
   jumpSfx: {fileID: 8300000, guid: ca5ec4d18f3c42644a6dc9d2ad8656ad, type: 3}
   landSfx: {fileID: 8300000, guid: 0d12434dc52de7f458a044ae6d20f30b, type: 3}

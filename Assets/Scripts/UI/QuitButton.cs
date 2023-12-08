@@ -8,7 +8,10 @@ public class QuitButton : MonoBehaviour
     private void Awake()
     {
         quitButton = GetComponent<Button>();
-        
+    }
+    
+    private void Start()
+    {
         quitButton.onClick.AddListener(QuitGame);
     }
     

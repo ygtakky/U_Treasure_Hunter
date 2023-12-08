@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private VoidEventChannelSO playerAttackCompletedChannel;
     [SerializeField] private VoidEventChannelSO attackButtonClickedChannel;
     [SerializeField] private VoidEventChannelSO jumpButtonClickedChannel;
+    [SerializeField] private IntEventChannelSO gameWonChannel;
     
     [Header("Grounding Check")]
     [SerializeField] private Transform groundCheck;
@@ -56,7 +57,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private bool isAttacking;
     private bool canAttack = true;
     private float attackTimer;
-    private bool isDead;
+    private bool isGameOver;
     
     #region Unity Events
     
@@ -85,6 +86,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         playerAttackCompletedChannel.OnEventRaised += OnAttackCompleted;
         attackButtonClickedChannel.OnEventRaised += AttackButtonClickedChannel_OnAttackButtonClicked;
         jumpButtonClickedChannel.OnEventRaised += JumpButtonClickedChannel_OnJumpButtonClicked;
+        gameWonChannel.OnEventRaised += gameWonChannel_OnEventRaised;
     }
 
     private void OnDisable()
@@ -92,11 +94,12 @@ public class PlayerController : MonoBehaviour, IDamageable
         playerAttackCompletedChannel.OnEventRaised -= OnAttackCompleted;
         attackButtonClickedChannel.OnEventRaised -= AttackButtonClickedChannel_OnAttackButtonClicked;
         jumpButtonClickedChannel.OnEventRaised -= JumpButtonClickedChannel_OnJumpButtonClicked;
+        gameWonChannel.OnEventRaised -= gameWonChannel_OnEventRaised;
     }
 
     private void Update()
     {
-        if (isDead) return;
+        if (isGameOver) return;
         
         GetInputs();
         UpdateAttackTimer();
@@ -104,7 +107,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void FixedUpdate()
     {
-        if (isDead) return;
+        if (isGameOver) return;
         
         CheckGrounded();
         Jump();
@@ -328,7 +331,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
-        if (isDead) return;
+        if (isGameOver) return;
         
         playerHitChannel.RaiseEvent(this);
         sfxAudioEventChannel.RaiseEvent(this, new AudioEventArgs(hitSfx));
@@ -339,7 +342,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (healthData.CurrentHealth <= 0)
         {
             playerDeathChannel.RaiseEvent(this);
-            isDead = true;
+            isGameOver = true;
         }
         
         playerHealthChangedChannel.RaiseEvent(this);
@@ -348,5 +351,10 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void AddForce(Vector2 direction, float force)
     {
         rb.AddForce(direction * force, ForceMode2D.Impulse);
+    }
+    
+    private void gameWonChannel_OnEventRaised(object sender, IntEventArgs e)
+    {
+        isGameOver = true;
     }
 }
