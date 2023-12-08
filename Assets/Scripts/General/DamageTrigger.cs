@@ -15,4 +15,9 @@ public class DamageTrigger : MonoBehaviour
     {
         damageable.TakeDamage(damage);
     }
+    
+    public void AddForce(Vector2 direction, float force)
+    {
+        damageable.AddForce(direction, force);
+    }
 }

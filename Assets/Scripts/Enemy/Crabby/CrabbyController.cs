@@ -201,6 +201,11 @@ public class CrabbyController : MonoBehaviour, IDamageable, IMoveable, IAggroabl
             OnDeath?.Invoke(this, EventArgs.Empty);
         }
     }
+    
+    public void AddForce(Vector2 direction, float force)
+    {
+        rb2D.AddForce(direction * force, ForceMode2D.Impulse);
+    }
 
     public void SetPlayerInRange(bool value)
     {

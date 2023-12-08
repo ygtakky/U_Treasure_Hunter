@@ -335,4 +335,9 @@ public class PlayerController : MonoBehaviour, IDamageable
         
         playerHealthChangedChannel.RaiseEvent(this);
     }
+    
+    public void AddForce(Vector2 direction, float force)
+    {
+        rb.AddForce(direction * force, ForceMode2D.Impulse);
+    }
 }
