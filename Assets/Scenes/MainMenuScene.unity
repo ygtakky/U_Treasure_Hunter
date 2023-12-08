@@ -2125,6 +2125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d4c1b16210de649a55a0fbb6890661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonDataSO: {fileID: 11400000, guid: 7f71065df17e5c845b7f4b005140c5d4, type: 2}
   screenToToggle: {fileID: 991670253}
 --- !u!1 &1102421727
 GameObject:
@@ -3274,6 +3275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d4c1b16210de649a55a0fbb6890661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonDataSO: {fileID: 11400000, guid: 7f71065df17e5c845b7f4b005140c5d4, type: 2}
   screenToToggle: {fileID: 991670253}
 --- !u!1 &1929635541
 GameObject:
@@ -3820,6 +3822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c315f2307e48746498c88c2167b10323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonDataSO: {fileID: 11400000, guid: 7f71065df17e5c845b7f4b005140c5d4, type: 2}
   sceneChangedEventChannel: {fileID: 11400000, guid: a65e042e1853fe941b8293d83ff38c91, type: 2}
   sceneToLoad: {fileID: 11400000, guid: 3d72eb0b16c835547bd8ffc85b842dae, type: 2}
 --- !u!1 &2063129382

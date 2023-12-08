@@ -1,18 +1,12 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-public class QuitButton : MonoBehaviour
+public class QuitButton : BaseButton
 {
-    private Button quitButton;
-    
-    private void Awake()
+    protected override void Start()
     {
-        quitButton = GetComponent<Button>();
-    }
-    
-    private void Start()
-    {
-        quitButton.onClick.AddListener(QuitGame);
+        base.Start();
+        
+        AddOnClickListener(QuitGame);
     }
     
     private void QuitGame()

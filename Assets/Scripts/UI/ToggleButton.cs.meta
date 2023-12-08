@@ -3,7 +3,9 @@ guid: 56d4c1b16210de649a55a0fbb6890661
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - buttonDataSO: {fileID: 11400000, guid: 7f71065df17e5c845b7f4b005140c5d4, type: 2}
+  - screenToToggle: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

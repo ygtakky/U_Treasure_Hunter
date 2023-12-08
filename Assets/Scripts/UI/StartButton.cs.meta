@@ -3,7 +3,10 @@ guid: c315f2307e48746498c88c2167b10323
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - buttonDataSO: {fileID: 11400000, guid: 7f71065df17e5c845b7f4b005140c5d4, type: 2}
+  - sceneChangedEventChannel: {fileID: 11400000, guid: a65e042e1853fe941b8293d83ff38c91, type: 2}
+  - sceneToLoad: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
