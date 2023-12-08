@@ -13,11 +13,6 @@ public class SceneLoader : MonoBehaviour
 
     private bool isLoadingScene;
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(this);
-    }
-
     private void OnEnable()
     {
         sceneEventChannel.OnEventRaised += SceneEventChannel_OnEventRaised;
@@ -43,13 +38,18 @@ public class SceneLoader : MonoBehaviour
         isLoadingScene = true;
         
         Scene currentScene = SceneManager.GetActiveScene();
+        AsyncOperation unloadOperation = SceneManager.UnloadSceneAsync(currentScene);
+
+        while (!unloadOperation.isDone)
+        {
+            yield return null;
+        }
         
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneData.scene.name, LoadSceneMode.Additive);
         asyncOperation.allowSceneActivation = false;
         
         asyncOperation.completed += (obj) =>
         {
-            SceneManager.UnloadSceneAsync(currentScene);
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneData.scene.name));
         };
 

@@ -49,6 +49,10 @@ MonoBehaviour:
   sfxEventChannel: {fileID: 11400000, guid: 13a392e228cd1134e84c738853c84440, type: 2}
   musicSource: {fileID: 3056174576688544756}
   sfxSources: []
+  musicMixerGroup: {fileID: -7988183842214790915, guid: 0be6b398f2ca0004f8f8e3cf4e621187, type: 2}
+  sfxMixerGroup: {fileID: -4195145413011413016, guid: 0be6b398f2ca0004f8f8e3cf4e621187, type: 2}
+  sfxVolume: 0
+  musicVolume: 0
 --- !u!82 &3056174576688544756
 AudioSource:
   m_ObjectHideFlags: 0
