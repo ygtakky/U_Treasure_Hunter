@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     [Header("Grounding Check")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private CapsuleCollider2D wallCollider;
     
     [Header("Attack Settings")]
     [SerializeField] private Transform attackPoint;
@@ -111,8 +112,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         
         CheckGrounded();
         Jump();
-        Move();
         Slide();
+        Move();
         Attack();
     }
 
@@ -161,6 +162,11 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         if (isJumpPressed && IsGrounded)
         {
+            if (IsTouchingWall())
+            {
+                horizontalInput = 0.0f;
+            }
+            
             rb.AddForce(Vector2.up * settings.jumpForce, ForceMode2D.Impulse);
             playerJumpChannel.RaiseEvent(this);
             sfxAudioEventChannel.RaiseEvent(this, new AudioEventArgs(jumpSfx));
@@ -197,16 +203,12 @@ public class PlayerController : MonoBehaviour, IDamageable
     
     private void Slide()
     {
-        if (IsGrounded || IsJumping()) return;
+        if (IsGrounded) return;
         
-        float inputDirection = horizontalInput;
+        if (!IsTouchingWall()) return;
         
-        RaycastHit2D hit = Physics2D.CapsuleCast(transform.position, new Vector2(0.5f, 0.5f), CapsuleDirection2D.Vertical, 0.0f, inputDirection * Vector2.right, 0.25f, groundLayer);
+        horizontalInput = 0.0f;
         
-        if (hit.collider != null)
-        {
-            rb.velocity = new Vector2(0, rb.velocity.y);
-        }
     }
     
     private void UpdateAttackTimer()
@@ -325,6 +327,13 @@ public class PlayerController : MonoBehaviour, IDamageable
     private bool IsFalling()
     {
         return rb.velocity.y < 0.0f && !IsGrounded;
+    }
+    
+    private bool IsTouchingWall()
+    {
+        RaycastHit2D hit = Physics2D.CapsuleCast((Vector2)transform.position + wallCollider.offset, wallCollider.size,
+            wallCollider.direction, 0.0f, Vector2.right * horizontalInput, 0.2f, groundLayer);
+        return hit.collider != null;
     }
     
     #endregion
